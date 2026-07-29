@@ -1,87 +1,89 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Créer une Séance</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer une Séance</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- مكتبة توليد الـ QR Code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
-<body class="bg-slate-100 min-h-screen p-4 flex justify-center items-center">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
 
-  <div class="bg-white p-6 rounded-2xl shadow-lg max-w-md w-full">
-    <h2 class="text-xl font-bold text-slate-800 mb-4 text-center">Créer une Séance</h2>
-    
-    <form id="seanceForm" class="space-y-3">
-      <div>
-        <label class="block text-sm text-slate-600">Cours</label>
-        <input type="text" id="cours" required class="w-full border rounded-lg p-2 text-sm">
-      </div>
-      <div>
-        <label class="block text-sm text-slate-600">Enseignant</label>
-        <input type="text" id="enseignant" required class="w-full border rounded-lg p-2 text-sm">
-      </div>
-      <div>
-        <label class="block text-sm text-slate-600">Cohorte</label>
-        <input type="text" id="cohorte" required class="w-full border rounded-lg p-2 text-sm">
-      </div>
-      <div class="grid grid-cols-2 gap-2">
-        <div>
-          <label class="block text-sm text-slate-600">Date</label>
-          <input type="date" id="date" required class="w-full border rounded-lg p-2 text-sm">
-        </div>
-        <div>
-          <label class="block text-sm text-slate-600">Heure</label>
-          <input type="time" id="heure" required class="w-full border rounded-lg p-2 text-sm">
-        </div>
-      </div>
-      <button type="submit" class="w-full bg-emerald-600 text-white py-2 rounded-lg font-bold hover:bg-emerald-700">
-        Générer QR Code
-      </button>
-    </form>
+    <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Créer une Séance</h2>
+        
+        <form id="qrForm" onsubmit="generateQR(event)" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Cours</label>
+                <input type="text" id="cours" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
 
-    <div id="qrContainer" class="mt-6 hidden text-center">
-      <p class="text-sm text-slate-500 mb-2">Scannez pour valider la présence :</p>
-      <div id="qrcode" class="flex justify-center mb-3"></div>
-      <p id="seanceIdDisplay" class="font-mono text-xs text-slate-400"></p>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Enseignant</label>
+                <input type="text" id="enseignant" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Cohorte</label>
+                <input type="text" id="cohorte" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                    <input type="date" id="date" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Heure</label>
+                    <input type="time" id="heure" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl transition duration-200 mt-4">
+                Générer QR Code
+            </button>
+        </form>
+
+        <!-- هنا سيظهر الـ QR Code -->
+        <div id="qrcode-container" class="mt-6 flex flex-col items-center justify-center hidden">
+            <p class="text-sm font-semibold text-gray-600 mb-2">Scannez pour valider la présence :</p>
+            <div id="qrcode" class="p-4 bg-white border border-gray-200 rounded-xl shadow"></div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbygJDUWrHO2YhNt-RyiZ4qiiP4DsagYb82jrQ1-GVOvCbMeyfGr_MDenBArWI4gIHow/exec"; 
-    const STUDENT_PAGE_URL = "https://emneyetideycheli-ctrl.github.io/presence/index.html"; 
-    // =========================================================================
+    <script>
+        // رابط صفحة الطالبة على GitHub Pages
+        const STUDENT_PAGE_URL = "https://emneyetideycheli-ctrl.github.io/presence/index.html";
 
-    document.getElementById('seanceForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const data = {
-        action: "createSeance",
-        cours: document.getElementById('cours').value,
-        enseignant: document.getElementById('enseignant').value,
-        cohorte: document.getElementById('cohorte').value,
-        date: document.getElementById('date').value,
-        heure: document.getElementById('heure').value
-      };
+        function generateQR(event) {
+            event.preventDefault(); // منع إعادة تحيين الصفحة عند الضغط
 
-      const res = await fetch(API_URL, {
-        method: "POST",
-        body: JSON.stringify(data)
-      });
-      
-      const result = await res.json();
-      
-      if (result.status === "success") {
-        document.getElementById('qrContainer').classList.remove('hidden');
-        document.getElementById('qrcode').innerHTML = "";
-        
-        // الرابط المضمّن في كود الـ QR مع الـ ID الفريد
-        const finalUrl = `${STUDENT_PAGE_URL}?id=${result.seanceId}`;
-        
-        new QRCode(document.getElementById("qrcode"), {
-          text: finalUrl,
-          width: 180,
-          height: 180
-        });
+            const cours = document.getElementById('cours').value;
+            const enseignant = document.getElementById('enseignant').value;
+            const cohorte = document.getElementById('cohorte').value;
+            const date = document.getElementById('date').value;
+            const heure = document.getElementById('heure').value;
 
-        document.getElementById
+            // إنشاء معرف فريد للحصة
+            const sessionId = "SEC-" + Date.now();
+            
+            // الرابط الكامل المدمج بالمعلومات
+            const fullUrl = `${STUDENT_PAGE_URL}?id=${sessionId}&cours=${encodeURIComponent(cours)}&enseignant=${encodeURIComponent(enseignant)}&cohorte=${encodeURIComponent(cohorte)}&date=${date}&heure=${heure}`;
+
+            // تفريغ المكان وإظهاره
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = "";
+            document.getElementById('qrcode-container').classList.remove('hidden');
+
+            // توليد الـ QR
+            new QRCode(qrContainer, {
+                text: fullUrl,
+                width: 200,
+                height: 200
+            });
+        }
+    </script>
+</body>
+</html>
