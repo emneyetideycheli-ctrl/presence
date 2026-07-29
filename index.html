@@ -3,80 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présence</title>
-    <!-- Tailwind CSS -->
+    <title>Valider ma présence</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-50/50 min-h-screen flex flex-col items-center justify-start pt-4 px-4 pb-12">
 
-    <div class="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md">
-        
-        <!-- تفاصيل الحصة -->
-        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl mb-6">
-            <h3 class="text-lg font-bold text-emerald-800 mb-3 flex items-center gap-2">
-                📋 Séance en cours
-            </h3>
-            <div class="space-y-2 text-sm text-gray-700">
-                <p>📚 <strong>Cours:</strong> <span id="coursDisplay" class="font-medium text-gray-900">...</span></p>
-                <p>👨‍🏫 <strong>Enseignant:</strong> <span id="enseignantDisplay" class="font-medium text-gray-900">...</span></p>
-                <p>🎯 <strong>Cohorte:</strong> <span id="cohorteDisplay" class="font-medium text-gray-900">...</span></p>
-                <p>📅 <strong>Date:</strong> <span id="dateDisplay" class="font-medium text-gray-900">...</span></p>
-                <p>⏰ <strong>Heure:</strong> <span id="heureDisplay" class="font-medium text-gray-900">...</span></p>
+    <!-- Header Navigation -->
+    <div class="w-full max-w-sm flex items-center justify-start mb-4">
+        <a href="#" onclick="location.reload()" class="text-emerald-500 font-semibold text-sm flex items-center gap-1.5 hover:underline">
+            <span class="text-base">←</span> Retour à l'accueil
+        </a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="w-full max-w-sm flex flex-col items-center">
+
+        <!-- Header Titles -->
+        <h1 class="text-3xl font-extrabold text-slate-800 text-center flex items-center justify-center gap-2 mb-1">
+            <span>🎓</span> Valider ma présence
+        </h1>
+        <p class="text-gray-400 text-sm mb-4 font-normal">Présence validée</p>
+
+        <!-- Divider Line -->
+        <div class="w-full h-[2px] bg-emerald-500 mb-6"></div>
+
+        <!-- 1️⃣ FORM CONTAINER (الصفحة الأولى: إدخال البيانات) -->
+        <div id="formContainer" class="w-full bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+            
+            <!-- Details Card -->
+            <div class="bg-emerald-50/60 border border-emerald-100 rounded-2xl p-4 mb-5">
+                <div class="flex items-center gap-2 text-emerald-800 font-bold text-sm mb-3">
+                    <span>📋</span>
+                    <span>Séance en cours</span>
+                </div>
+                <div class="space-y-1.5 text-xs text-gray-600 font-medium">
+                    <p>📚 <strong>Cours:</strong> <span id="coursDisplay" class="text-gray-900">...</span></p>
+                    <p>👨‍🏫 <strong>Enseignant:</strong> <span id="enseignantDisplay" class="text-gray-900">...</span></p>
+                    <p>🎯 <strong>Cohorte:</strong> <span id="cohorteDisplay" class="text-gray-900">...</span></p>
+                    <p>📅 <strong>Date:</strong> <span id="dateDisplay" class="text-gray-900">...</span></p>
+                    <p>⏰ <strong>Heure:</strong> <span id="heureDisplay" class="text-gray-900">...</span></p>
+                </div>
             </div>
+
+            <!-- Form Inputs -->
+            <form id="studentForm" class="space-y-4">
+                <h3 class="text-gray-800 font-semibold text-sm mb-2">Complétez vos informations :</h3>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Nom *</label>
+                    <input type="text" id="nom" placeholder="Entrez votre nom" required 
+                           class="w-full p-3 text-sm bg-gray-50/50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition placeholder:text-gray-300">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Prénom *</label>
+                    <input type="text" id="prenom" placeholder="Entrez votre prénom" required 
+                           class="w-full p-3 text-sm bg-gray-50/50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition placeholder:text-gray-300">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1">Numéro *</label>
+                    <input type="tel" id="numero" placeholder="Entrez votre numéro de téléphone" required 
+                           class="w-full p-3 text-sm bg-gray-50/50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-emerald-500 outline-none transition placeholder:text-gray-300">
+                </div>
+
+                <button type="submit" 
+                        class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm py-3.5 rounded-xl transition shadow-sm mt-3">
+                    Envoyer
+                </button>
+            </form>
         </div>
 
-        <!-- استمارة التسجيل -->
-        <form id="studentForm" class="space-y-4">
-            <h4 class="font-semibold text-gray-800 border-b pb-2">Complétez vos informations :</h4>
+        <!-- 2️⃣ SUCCESS CONTAINER (الصفحة الأخيرة: تأكيد تسجيل الحضور) -->
+        <div id="successContainer" class="hidden w-full bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-gray-100/80 text-center flex flex-col items-center">
             
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
-                <input type="text" id="nom" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+            <!-- Green Checkbox Icon -->
+            <div class="my-4">
+                <div class="w-16 h-16 bg-[#22c55e] rounded-2xl flex items-center justify-center shadow-md shadow-green-200">
+                    <svg class="w-10 h-10 text-white stroke-[3.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
             </div>
 
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Prénom *</label>
-                <input type="text" id="prenom" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
-            </div>
+            <!-- Title -->
+            <h2 class="text-2xl font-bold text-emerald-800 mb-3">Présence enregistrée !</h2>
 
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Numéro *</label>
-                <input type="tel" id="numero" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
-            </div>
+            <!-- Student Full Name -->
+            <p id="studentNameDisplay" class="text-gray-600 font-semibold text-base mb-1">...</p>
 
-            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl transition duration-200 mt-2">
-                Envoyer
+            <!-- Course Info + Date & Time -->
+            <p class="text-gray-600 text-sm font-normal mb-1">
+                <span id="summaryCours">...</span> — <span id="summaryDate">...</span> à <span id="summaryHeure">...</span>
+            </p>
+
+            <!-- Teacher Info -->
+            <p class="text-gray-400 text-xs font-normal mb-6">
+                Enseignant : <span id="summaryEnseignant">...</span>
+            </p>
+
+            <!-- Blue Back Button -->
+            <button onclick="location.reload()" 
+                    class="w-full bg-[#1d9bf0] hover:bg-sky-500 text-white font-bold text-sm py-3.5 rounded-2xl transition shadow-sm flex items-center justify-center gap-2">
+                <span>←</span> Retour à l'accueil
             </button>
-        </form>
+        </div>
 
     </div>
 
     <script>
-        // قراءة المعلمات الممررة عبر الرابط
+        // قراءة المتغيرات من رابط الصفحة
         const urlParams = new URLSearchParams(window.location.search);
         
         const id = urlParams.get('id');
-        const cours = urlParams.get('cours');
-        const enseignant = urlParams.get('enseignant');
-        const cohorte = urlParams.get('cohorte');
-        const date = urlParams.get('date');
-        const heure = urlParams.get('heure');
+        const cours = urlParams.get('cours') || '-';
+        const enseignant = urlParams.get('enseignant') || '-';
+        const cohorte = urlParams.get('cohorte') || '-';
+        const date = urlParams.get('date') || '-';
+        const heure = urlParams.get('heure') || '-';
 
-        // التثبت وقراءة البيانات
-        if (!id) {
-            alert("Séance introuvable!");
-        } else {
-            document.getElementById('coursDisplay').innerText = cours || '-';
-            document.getElementById('enseignantDisplay').innerText = enseignant || '-';
-            document.getElementById('cohorteDisplay').innerText = cohorte || '-';
-            document.getElementById('dateDisplay').innerText = date || '-';
-            document.getElementById('heureDisplay').innerText = heure || '-';
-        }
+        // ملء بيانات الحصة عند فتح الصفحة
+        document.getElementById('coursDisplay').innerText = cours;
+        document.getElementById('enseignantDisplay').innerText = enseignant;
+        document.getElementById('cohorteDisplay').innerText = cohorte;
+        document.getElementById('dateDisplay').innerText = date;
+        document.getElementById('heureDisplay').innerText = heure;
 
-        // إرسال البيانات (يمكن ربطها مع Google Sheets لاحقاً)
+        // عند إرسال استمارة البيانات
         document.getElementById('studentForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert("Présence enregistrée avec succès !");
+            
+            const nom = document.getElementById('nom').value.trim();
+            const prenom = document.getElementById('prenom').value.trim();
+
+            // إخفاء استمارة البيانات وإظهار شاشة التأكيد النهائية
+            document.getElementById('formContainer').classList.add('hidden');
+            document.getElementById('successContainer').classList.remove('hidden');
+
+            // طباعة الاسم والمعلومات المسجلة في الصفحة الأخيرة
+            document.getElementById('studentNameDisplay').innerText = prenom + " " + nom;
+            document.getElementById('summaryCours').innerText = cours;
+            document.getElementById('summaryDate').innerText = date;
+            document.getElementById('summaryHeure').innerText = heure;
+            document.getElementById('summaryEnseignant').innerText = enseignant;
         });
     </script>
 </body>
