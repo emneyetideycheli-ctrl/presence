@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valider ma présence</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -15,45 +16,56 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-start pt-3 px-4 pb-12 relative">
 
+    <!-- 🌟 TOP HEADER CONTAINER (شريط الشعار العلوي) -->
     <div class="w-full max-w-sm mb-4">
         <header class="w-full bg-white rounded-2xl p-3 shadow-sm border border-gray-100 flex items-center justify-between">
             
+            <!-- 👈 جهة اليسار: شعار SAFIA -->
             <div class="flex items-center">
                 <div class="w-11 h-11 rounded-full overflow-hidden border border-purple-200 shadow-sm flex items-center justify-center bg-white">
-                    <img src="images/safia.jpg" alt="SAFIA" class="w-full h-full object-cover">
+                    <img src="safia.jpg" alt="SAFIA" class="w-full h-full object-cover">
                 </div>
             </div>
 
+            <!-- 👉 جهة اليمين: شعارا موريتانيا واليونيسف -->
             <div class="flex items-center gap-2">
+                <!-- الجمهورية الإسلامية الموريتانية -->
                 <div class="w-11 h-11 rounded-full overflow-hidden border border-gray-200 shadow-sm flex items-center justify-center bg-white">
-                    <img src="images/mauritania.jpg" alt="Mauritanie" class="w-full h-full object-cover">
+                    <img src="mauritania.jpg" alt="Mauritanie" class="w-full h-full object-cover">
                 </div>
 
+                <!-- UNICEF -->
                 <div class="w-11 h-11 rounded-full overflow-hidden border border-sky-200 shadow-sm flex items-center justify-center bg-white">
-                    <img src="images/unicef.jpg" alt="UNICEF" class="w-full h-full object-cover">
+                    <img src="unicef.jpg" alt="UNICEF" class="w-full h-full object-cover">
                 </div>
             </div>
 
         </header>
     </div>
 
+    <!-- Top Navigation Link (زر الخروج) -->
     <div id="topNav" class="w-full max-w-sm flex items-center justify-start mb-3">
         <button type="button" onclick="showWarningModal()" class="text-purple-800 font-semibold text-sm flex items-center gap-1 hover:underline outline-none">
             <span class="text-base">←</span> Quitter
         </button>
     </div>
 
+    <!-- Main Container -->
     <div class="w-full max-w-sm flex flex-col items-center">
 
+        <!-- Page Main Title -->
         <h1 class="text-3xl font-extrabold text-[#1e293b] text-center flex items-center justify-center gap-2 mb-1">
             <span class="text-2xl">🎓</span> Valider ma présence
         </h1>
         <p id="pageSubTitle" class="text-gray-400 text-sm mb-4 font-normal">Complétez vos informations</p>
 
+        <!-- Top Purple Divider Line -->
         <div class="w-full h-[3px] bg-gradient-to-r from-purple-900 via-purple-600 to-purple-800 rounded-full mb-6"></div>
 
+        <!-- 1️⃣ FORM & DETAILS CONTAINER -->
         <div id="formContainer" class="w-full space-y-6">
 
+            <!-- PURPLE CARD: Séance en cours -->
             <div class="bg-purple-50 border-l-4 border-purple-700 rounded-3xl p-5 shadow-sm">
                 <h2 class="text-2xl font-extrabold text-purple-900 mb-4 flex items-center gap-2">
                     <span>📋</span> Séance en cours
@@ -87,6 +99,7 @@
                 </div>
             </div>
 
+            <!-- WHITE CARD: Vos informations -->
             <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
                 <h2 class="text-2xl font-extrabold text-[#1e293b] mb-2 flex items-center gap-2">
                     <span>✍️</span> Vos informations
@@ -131,6 +144,7 @@
                 </form>
             </div>
 
+            <!-- Footer -->
             <div class="text-center pt-2 pb-4">
                 <p class="text-xs text-gray-400 font-medium">
                     © 2026 — Solution de gestion des présences
@@ -139,6 +153,7 @@
 
         </div>
 
+        <!-- 2️⃣ SUCCESS CONTAINER -->
         <div id="successContainer" class="hidden w-full bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-gray-100 text-center flex flex-col items-center">
             
             <div class="my-4">
@@ -168,6 +183,7 @@
 
     </div>
 
+    <!-- ⚠️ WARNING MODAL -->
     <div id="warningModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-gray-100 text-center animate-in fade-in zoom-in duration-200">
             <div class="w-16 h-16 bg-amber-100 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
@@ -177,7 +193,7 @@
             <h3 class="text-xl font-bold text-gray-800 mb-2">Attention !</h3>
             
             <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium">
-                Il est strictement interdit d'enregistrer la présence d'une personne absente.
+                Il est strictly interdit d'enregistrer la présence d'une personne absente.
             </p>
 
             <div class="flex flex-col gap-2.5">
