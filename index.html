@@ -16,16 +16,16 @@
 </head>
 <body class="min-h-screen flex items-center justify-center py-4 px-2 sm:px-4">
 
-    <!-- 🌟 MAIN CONTAINER WITH ROUNDED CORNERS (الإطار الخارجي المنحني بالكامل) -->
+    <!-- 🌟 MAIN CONTAINER WITH ROUNDED CORNERS -->
     <div class="w-full max-w-md bg-white rounded-[32px] shadow-xl border border-gray-100 p-4 sm:p-6 flex flex-col items-center relative overflow-hidden">
 
-        <!-- 🏢 CENTER NAME BANNER (شريط اسم المركز) -->
+        <!-- 🏢 CENTER NAME BANNER -->
         <div class="w-full bg-gradient-to-r from-purple-900 via-purple-700 to-purple-900 text-white rounded-2xl py-2.5 px-4 shadow-sm mb-3 flex items-center justify-center gap-2 border border-purple-300/30">
             <span class="text-amber-300 text-sm">📍</span>
             <span class="text-xs sm:text-sm font-extrabold tracking-wide uppercase">Centre SAFIA — Dar Naim</span>
         </div>
 
-        <!-- 🌟 TOP HEADER CONTAINER (شريط الشعار العلوي) -->
+        <!-- 🌟 TOP HEADER CONTAINER -->
         <header class="w-full bg-white rounded-2xl p-2 shadow-sm border border-gray-100 flex items-center justify-between mb-4">
             
             <!-- 👈 جهة اليسار: شعار SAFIA -->
@@ -50,7 +50,7 @@
 
         </header>
 
-        <!-- Top Navigation Link (زر الخروج) -->
+        <!-- Top Navigation Link -->
         <div id="topNav" class="w-full flex items-center justify-start mb-3">
             <button type="button" onclick="showWarningModal()" class="text-purple-800 font-semibold text-sm flex items-center gap-1 hover:underline outline-none">
                 <span class="text-base">←</span> Quitter
@@ -214,8 +214,8 @@
     </div>
 
     <script>
-        // 🔗 تم إدراج رابط Google Apps Script الخاص بك هنا
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxgs-6zJzQinE-G3m0HiNmH4BstkYMWdR8d23ksxN77DGQFcTUBuTJkHJO2dEMHd-rMwQ/exec";
+        // 🔗 تم تحديث الرابط الجديد المباشر هنا
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx4h_7uCRC6YC_EMsLqH1y_5p7Y_pWvzzD-X2i1z5zxEo1kPpf33KRrSRXpNO9qpO6YeA/exec";
 
         const urlParams = new URLSearchParams(window.location.search);
         
@@ -264,7 +264,7 @@
                 genre: genre
             };
 
-            // إرسال البيانات فورياً إلى Google Sheets
+            // إرسال البيانات إلى Google Sheets
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
