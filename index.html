@@ -10,15 +10,17 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f8fafc;
+            background-color: #e2e8f0; /* خلفية الرمادي الناعم الخارجي */
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-start pt-3 px-4 pb-12 relative">
+<body class="min-h-screen flex items-center justify-center py-4 px-2 sm:px-4">
 
-    <!-- 🌟 TOP HEADER CONTAINER (شريط الشعار العلوي) -->
-    <div class="w-full max-w-sm mb-4">
-        <header class="w-full bg-white rounded-3xl p-3 shadow-sm border border-gray-100 flex items-center justify-between">
+    <!-- 🌟 MAIN CONTAINER WITH ROUNDED CORNERS (الإطار الخارجي المنحني بالكامل) -->
+    <div class="w-full max-w-md bg-white rounded-[32px] shadow-xl border border-gray-100 p-4 sm:p-6 flex flex-col items-center relative overflow-hidden">
+
+        <!-- 🌟 TOP HEADER CONTAINER (شريط الشعار العلوي) -->
+        <header class="w-full bg-white rounded-2xl p-2 shadow-sm border border-gray-100 flex items-center justify-between mb-4">
             
             <!-- 👈 جهة اليسار: شعار SAFIA -->
             <div class="flex items-center">
@@ -41,17 +43,13 @@
             </div>
 
         </header>
-    </div>
 
-    <!-- Top Navigation Link (زر الخروج) -->
-    <div id="topNav" class="w-full max-w-sm flex items-center justify-start mb-3">
-        <button type="button" onclick="showWarningModal()" class="text-purple-800 font-semibold text-sm flex items-center gap-1 hover:underline outline-none">
-            <span class="text-base">←</span> Quitter
-        </button>
-    </div>
-
-    <!-- Main Container -->
-    <div class="w-full max-w-sm flex flex-col items-center">
+        <!-- Top Navigation Link (زر الخروج) -->
+        <div id="topNav" class="w-full flex items-center justify-start mb-3">
+            <button type="button" onclick="showWarningModal()" class="text-purple-800 font-semibold text-sm flex items-center gap-1 hover:underline outline-none">
+                <span class="text-base">←</span> Quitter
+            </button>
+        </div>
 
         <!-- Page Main Title -->
         <h1 class="text-3xl font-extrabold text-[#1e293b] text-center flex items-center justify-center gap-2 mb-1">
@@ -65,8 +63,8 @@
         <!-- 1️⃣ FORM & DETAILS CONTAINER -->
         <div id="formContainer" class="w-full space-y-6">
 
-            <!-- PURPLE CARD: Séance en cours (تم تعديل الحواف والحدود هنا) -->
-            <div class="bg-purple-50/60 border-2 border-purple-700 rounded-[30px] p-5 shadow-sm">
+            <!-- PURPLE CARD: Séance en cours (تمت إعادتها لشكلها الأصلي الجميل) -->
+            <div class="bg-purple-50 border-l-4 border-purple-700 rounded-3xl p-5 shadow-sm">
                 <h2 class="text-2xl font-extrabold text-purple-900 mb-4 flex items-center gap-2">
                     <span>📋</span> Séance en cours
                 </h2>
@@ -100,7 +98,7 @@
             </div>
 
             <!-- WHITE CARD: Vos informations -->
-            <div class="bg-white rounded-[30px] p-6 shadow-sm border border-gray-100">
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100">
                 <h2 class="text-2xl font-extrabold text-[#1e293b] mb-2 flex items-center gap-2">
                     <span>✍️</span> Vos informations
                 </h2>
@@ -108,7 +106,7 @@
                     Complétez vos informations pour valider votre présence à cette séance.
                 </p>
 
-                <form id="studentForm" class="space-y-5">
+                <form id="studentForm" class="space-y-4">
                     <div>
                         <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Nom *</label>
                         <input type="text" id="nom" placeholder="Votre nom de famille" required 
@@ -145,7 +143,7 @@
             </div>
 
             <!-- Footer -->
-            <div class="text-center pt-2 pb-4">
+            <div class="text-center pt-2 pb-2">
                 <p class="text-xs text-gray-400 font-medium">
                     © 2026 — Solution de gestion des présences
                 </p>
@@ -154,7 +152,7 @@
         </div>
 
         <!-- 2️⃣ SUCCESS CONTAINER -->
-        <div id="successContainer" class="hidden w-full bg-white rounded-[30px] p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-gray-100 text-center flex flex-col items-center">
+        <div id="successContainer" class="hidden w-full bg-white rounded-3xl p-6 shadow-sm border border-gray-100 text-center flex flex-col items-center">
             
             <div class="my-4">
                 <div class="w-16 h-16 bg-purple-700 rounded-2xl flex items-center justify-center shadow-md shadow-purple-200">
@@ -185,7 +183,7 @@
 
     <!-- ⚠️ WARNING MODAL -->
     <div id="warningModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-[30px] p-6 max-w-sm w-full shadow-2xl border border-gray-100 text-center animate-in fade-in zoom-in duration-200">
+        <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-gray-100 text-center">
             <div class="w-16 h-16 bg-amber-100 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
                 ⚠️
             </div>
@@ -193,7 +191,7 @@
             <h3 class="text-xl font-bold text-gray-800 mb-2">Attention !</h3>
             
             <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium">
-                Il est strictement interdit d'enregistrer la présence d'une personne absente.
+                Il est strictly interdit d'enregistrer la présence d'une personne absente.
             </p>
 
             <div class="flex flex-col gap-2.5">
