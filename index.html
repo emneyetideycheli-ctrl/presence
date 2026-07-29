@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valider ma présence</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -13,51 +14,85 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-start pt-6 px-4 pb-12 relative">
+<body class="min-h-screen flex flex-col items-center justify-start pt-4 px-4 pb-12 relative">
 
+    <!-- 🌟 TOP HEADER LOGOS (الشعارات الدائرية في الأعلى) -->
+    <header class="w-full max-w-sm flex items-center justify-between mb-4 px-1">
+        <!-- جهة اليمين: أيقونة SAFIA وحدها -->
+        <div class="flex items-center">
+            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-200 shadow-sm flex items-center justify-center bg-white">
+                <img src="safia.jpg" alt="SAFIA Logo" class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <!-- جهة اليسار: أيقونتا موريتانيا واليونيسف معاً -->
+        <div class="flex items-center gap-2">
+            <!-- أيقونة الجمهورية الإسلامية الموريتانية -->
+            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-100 shadow-sm flex items-center justify-center bg-white">
+                <img src="mauritania.jpg" alt="Mauritanie" class="w-full h-full object-cover">
+            </div>
+
+            <!-- أيقونة اليونيسف -->
+            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-sky-100 shadow-sm flex items-center justify-center bg-[#00adef]">
+                <img src="unicef.jpg" alt="UNICEF Logo" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Link (زر الخروج العلوي) -->
     <div id="topNav" class="w-full max-w-sm flex items-center justify-start mb-4">
         <button type="button" onclick="showWarningModal()" class="text-purple-800 font-semibold text-sm flex items-center gap-1 hover:underline outline-none">
             <span class="text-base">←</span> Quitter
         </button>
     </div>
 
+    <!-- Main Container -->
     <div class="w-full max-w-sm flex flex-col items-center">
 
+        <!-- Page Main Title -->
         <h1 class="text-3xl font-extrabold text-[#1e293b] text-center flex items-center justify-center gap-2 mb-1">
             <span class="text-2xl">🎓</span> Valider ma présence
         </h1>
         <p id="pageSubTitle" class="text-gray-400 text-sm mb-4 font-normal">Complétez vos informations</p>
 
+        <!-- Top Purple Divider Line -->
         <div class="w-full h-[3px] bg-gradient-to-r from-purple-900 via-purple-600 to-purple-800 rounded-full mb-6"></div>
 
+        <!-- 1️⃣ FORM & DETAILS CONTAINER (شاشة الاستمارة) -->
         <div id="formContainer" class="w-full space-y-6">
 
+            <!-- PURPLE CARD: Séance en cours -->
             <div class="bg-purple-50 border-l-4 border-purple-700 rounded-3xl p-5 shadow-sm">
                 <h2 class="text-2xl font-extrabold text-purple-900 mb-4 flex items-center gap-2">
                     <span>📋</span> Séance en cours
                 </h2>
 
                 <div class="space-y-3">
+                    <!-- Cours -->
                     <div class="bg-white rounded-2xl p-3 shadow-sm border border-purple-100">
                         <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">📚 Cours</span>
                         <p id="coursDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
 
+                    <!-- Enseignant -->
                     <div class="bg-white rounded-2xl p-3 shadow-sm border border-purple-100">
                         <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">👨‍🏫 Enseignant</span>
                         <p id="enseignantDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
 
+                    <!-- Cohorte -->
                     <div class="bg-white rounded-2xl p-3 shadow-sm border border-purple-100">
                         <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">🎯 Cohorte</span>
                         <p id="cohorteDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
 
+                    <!-- Date -->
                     <div class="bg-white rounded-2xl p-3 shadow-sm border border-purple-100">
                         <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">📅 Date</span>
                         <p id="dateDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
 
+                    <!-- Heure -->
                     <div class="bg-white rounded-2xl p-3 shadow-sm border border-purple-100">
                         <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">⏰ Heure</span>
                         <p id="heureDisplay" class="text-base font-bold text-[#1e293b]">...</p>
@@ -65,6 +100,7 @@
                 </div>
             </div>
 
+            <!-- WHITE CARD: Vos informations -->
             <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
                 <h2 class="text-2xl font-extrabold text-[#1e293b] mb-2 flex items-center gap-2">
                     <span>✍️</span> Vos informations
@@ -74,24 +110,28 @@
                 </p>
 
                 <form id="studentForm" class="space-y-5">
+                    <!-- Nom -->
                     <div>
                         <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Nom *</label>
                         <input type="text" id="nom" placeholder="Votre nom de famille" required 
                                class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
                     </div>
 
+                    <!-- Prénom -->
                     <div>
                         <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Prénom *</label>
                         <input type="text" id="prenom" placeholder="Votre prénom" required 
                                class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
                     </div>
 
+                    <!-- Numéro étudiant -->
                     <div>
                         <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Numéro étudiant *</label>
                         <input type="text" id="numero" placeholder="Ex : E12345678" required 
                                class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
                     </div>
 
+                    <!-- Genre -->
                     <div>
                         <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Genre *</label>
                         <select id="genre" required 
@@ -102,6 +142,7 @@
                         </select>
                     </div>
 
+                    <!-- Submit Button -->
                     <button type="submit" 
                             class="w-full bg-gradient-to-r from-purple-800 to-purple-600 hover:from-purple-900 hover:to-purple-700 text-white font-extrabold text-base py-4 rounded-2xl transition shadow-md shadow-purple-200 flex items-center justify-center gap-2 mt-4">
                         <span>✅</span> Valider ma présence
@@ -109,6 +150,7 @@
                 </form>
             </div>
 
+            <!-- Footer -->
             <div class="text-center pt-2 pb-4">
                 <p class="text-xs text-gray-400 font-medium">
                     © 2026 — Solution de gestion des présences
@@ -117,8 +159,10 @@
 
         </div>
 
+        <!-- 2️⃣ SUCCESS CONTAINER (شاشة التأكيد النهائية) -->
         <div id="successContainer" class="hidden w-full bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-gray-100 text-center flex flex-col items-center">
             
+            <!-- Check Icon -->
             <div class="my-4">
                 <div class="w-16 h-16 bg-purple-700 rounded-2xl flex items-center justify-center shadow-md shadow-purple-200">
                     <svg class="w-10 h-10 text-white stroke-[3.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,10 +171,13 @@
                 </div>
             </div>
 
+            <!-- Title -->
             <h2 class="text-2xl font-bold text-purple-900 mb-3">Présence enregistrée !</h2>
 
+            <!-- Student Full Name -->
             <p id="studentNameDisplay" class="text-gray-700 font-bold text-lg mb-2">...</p>
 
+            <!-- Details -->
             <p class="text-gray-600 text-sm font-medium mb-1">
                 <span id="summaryCours">...</span> — <span id="summaryDate">...</span> à <span id="summaryHeure">...</span>
             </p>
@@ -139,13 +186,15 @@
                 Enseignant : <span id="summaryEnseignant">...</span>
             </p>
 
+            <!-- Note Info -->
             <div class="bg-purple-50 text-purple-800 rounded-2xl p-4 text-xs font-semibold leading-relaxed border border-purple-100 w-full">
-                🔒 Votre présence a été validée avec succès. Vous pouvez fermer هذه الصفحة.
+                🔒 Votre présence a été validée avec succès. Vous pouvez fermer cette page.
             </div>
         </div>
 
     </div>
 
+    <!-- ⚠️ WARNING MODAL -->
     <div id="warningModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-gray-100 text-center animate-in fade-in zoom-in duration-200">
             <div class="w-16 h-16 bg-amber-100 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
@@ -155,7 +204,7 @@
             <h3 class="text-xl font-bold text-gray-800 mb-2">Attention !</h3>
             
             <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium">
-                Il est strictly interdit d'enregistrer la présence d'une personne absente.
+                Il est strictement interdit d'enregistrer la présence d'une personne absente.
             </p>
 
             <div class="flex flex-col gap-2.5">
