@@ -15,9 +15,9 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-start pt-6 px-4 pb-12 relative">
 
-    <div class="w-full max-w-sm flex items-center justify-start mb-4">
-        <button type="button" onclick="showWarningModal()" class="text-emerald-600 font-semibold text-sm flex items-center gap-1 hover:underline outline-none">
-            <span class="text-base">←</span> Retour à l'accueil
+    <div id="topNav" class="w-full max-w-sm flex items-center justify-start mb-4">
+        <button type="button" onclick="showWarningModal()" class="text-purple-800 font-semibold text-sm flex items-center gap-1 hover:underline outline-none">
+            <span class="text-base">←</span> Quitter
         </button>
     </div>
 
@@ -26,39 +26,39 @@
         <h1 class="text-3xl font-extrabold text-[#1e293b] text-center flex items-center justify-center gap-2 mb-1">
             <span class="text-2xl">🎓</span> Valider ma présence
         </h1>
-        <p class="text-gray-400 text-sm mb-4 font-normal">Complétez vos informations</p>
+        <p id="pageSubTitle" class="text-gray-400 text-sm mb-4 font-normal">Complétez vos informations</p>
 
-        <div class="w-full h-[2px] bg-[#4cd137] mb-6"></div>
+        <div class="w-full h-[3px] bg-gradient-to-r from-purple-900 via-purple-600 to-purple-800 rounded-full mb-6"></div>
 
         <div id="formContainer" class="w-full space-y-6">
 
-            <div class="bg-[#f1f8e9] border-l-4 border-[#4cd137] rounded-3xl p-5 shadow-sm">
-                <h2 class="text-2xl font-extrabold text-[#2e7d32] mb-4 flex items-center gap-2">
+            <div class="bg-purple-50 border-l-4 border-purple-700 rounded-3xl p-5 shadow-sm">
+                <h2 class="text-2xl font-extrabold text-purple-900 mb-4 flex items-center gap-2">
                     <span>📋</span> Séance en cours
                 </h2>
 
                 <div class="space-y-3">
-                    <div class="bg-white rounded-2xl p-3 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-2xl p-3 shadow-sm border border-purple-100">
                         <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">📚 Cours</span>
                         <p id="coursDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
 
-                    <div class="bg-white rounded-2xl p-3 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-2xl p-3 shadow-sm border border-purple-100">
                         <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">👨‍🏫 Enseignant</span>
                         <p id="enseignantDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
 
-                    <div class="bg-white rounded-2xl p-3 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-2xl p-3 shadow-sm border border-purple-100">
                         <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">🎯 Cohorte</span>
                         <p id="cohorteDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
 
-                    <div class="bg-white rounded-2xl p-3 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-2xl p-3 shadow-sm border border-purple-100">
                         <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">📅 Date</span>
                         <p id="dateDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
 
-                    <div class="bg-white rounded-2xl p-3 shadow-sm border border-gray-100">
+                    <div class="bg-white rounded-2xl p-3 shadow-sm border border-purple-100">
                         <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">⏰ Heure</span>
                         <p id="heureDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
@@ -77,19 +77,19 @@
                     <div>
                         <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Nom *</label>
                         <input type="text" id="nom" placeholder="Votre nom de famille" required 
-                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-sky-400 focus:ring-4 focus:ring-sky-100 outline-none transition placeholder:text-gray-300 font-medium">
+                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
                     </div>
 
                     <div>
                         <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Prénom *</label>
                         <input type="text" id="prenom" placeholder="Votre prénom" required 
-                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-sky-400 focus:ring-4 focus:ring-sky-100 outline-none transition placeholder:text-gray-300 font-medium">
+                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
                     </div>
 
                     <div>
                         <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Numéro étudiant *</label>
                         <input type="text" id="numero" placeholder="Ex : E12345678" required 
-                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-sky-400 focus:ring-4 focus:ring-sky-100 outline-none transition placeholder:text-gray-300 font-medium">
+                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
                     </div>
 
                     <div>
@@ -103,7 +103,7 @@
                     </div>
 
                     <button type="submit" 
-                            class="w-full bg-[#44bd32] hover:bg-[#3ace2a] text-white font-extrabold text-base py-4 rounded-2xl transition shadow-md shadow-green-100 flex items-center justify-center gap-2 mt-4">
+                            class="w-full bg-gradient-to-r from-purple-800 to-purple-600 hover:from-purple-900 hover:to-purple-700 text-white font-extrabold text-base py-4 rounded-2xl transition shadow-md shadow-purple-200 flex items-center justify-center gap-2 mt-4">
                         <span>✅</span> Valider ma présence
                     </button>
                 </form>
@@ -111,7 +111,7 @@
 
             <div class="text-center pt-2 pb-4">
                 <p class="text-xs text-gray-400 font-medium">
-                    © 2026 — Solution de gestion des présences | <button type="button" onclick="showWarningModal()" class="text-emerald-600 hover:underline">Accueil</button>
+                    © 2026 — Solution de gestion des présences
                 </p>
             </div>
 
@@ -120,18 +120,18 @@
         <div id="successContainer" class="hidden w-full bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-gray-100 text-center flex flex-col items-center">
             
             <div class="my-4">
-                <div class="w-16 h-16 bg-[#22c55e] rounded-2xl flex items-center justify-center shadow-md shadow-green-200">
+                <div class="w-16 h-16 bg-purple-700 rounded-2xl flex items-center justify-center shadow-md shadow-purple-200">
                     <svg class="w-10 h-10 text-white stroke-[3.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
                     </svg>
                 </div>
             </div>
 
-            <h2 class="text-2xl font-bold text-[#2e7d32] mb-3">Présence enregistrée !</h2>
+            <h2 class="text-2xl font-bold text-purple-900 mb-3">Présence enregistrée !</h2>
 
-            <p id="studentNameDisplay" class="text-gray-600 font-semibold text-base mb-1">...</p>
+            <p id="studentNameDisplay" class="text-gray-700 font-bold text-lg mb-2">...</p>
 
-            <p class="text-gray-600 text-sm font-normal mb-1">
+            <p class="text-gray-600 text-sm font-medium mb-1">
                 <span id="summaryCours">...</span> — <span id="summaryDate">...</span> à <span id="summaryHeure">...</span>
             </p>
 
@@ -139,10 +139,9 @@
                 Enseignant : <span id="summaryEnseignant">...</span>
             </p>
 
-            <button type="button" onclick="showWarningModal()" 
-                    class="w-full bg-[#1d9bf0] hover:bg-sky-500 text-white font-bold text-sm py-3.5 rounded-2xl transition shadow-sm flex items-center justify-center gap-2">
-                <span>←</span> Retour à l'accueil
-            </button>
+            <div class="bg-purple-50 text-purple-800 rounded-2xl p-4 text-xs font-semibold leading-relaxed border border-purple-100 w-full">
+                🔒 Votre présence a été validée avec succès. Vous pouvez fermer هذه الصفحة.
+            </div>
         </div>
 
     </div>
@@ -156,7 +155,7 @@
             <h3 class="text-xl font-bold text-gray-800 mb-2">Attention !</h3>
             
             <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium">
-                Il est strictement interdit d'enregistrer la présence d'une personne absente.
+                Il est strictly interdit d'enregistrer la présence d'une personne absente.
             </p>
 
             <div class="flex flex-col gap-2.5">
@@ -173,41 +172,58 @@
     </div>
 
     <script>
-        // Read URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         
-        const id = urlParams.get('id');
+        const id = urlParams.get('id') || 'default';
         const cours = urlParams.get('cours') || '-';
         const enseignant = urlParams.get('enseignant') || '-';
         const cohorte = urlParams.get('cohorte') || '-';
         const date = urlParams.get('date') || '-';
         const heure = urlParams.get('heure') || '-';
 
-        // Populate initial details
+        // Display data
         document.getElementById('coursDisplay').innerText = cours;
         document.getElementById('enseignantDisplay').innerText = enseignant;
         document.getElementById('cohorteDisplay').innerText = cohorte;
         document.getElementById('dateDisplay').innerText = date;
         document.getElementById('heureDisplay').innerText = heure;
 
-        // Form submission
+        // Check if attendance was already submitted in this session
+        const sessionKey = 'presence_done_' + id + '_' + date + '_' + heure;
+        if (sessionStorage.getItem(sessionKey)) {
+            const savedData = JSON.parse(sessionStorage.getItem(sessionKey));
+            showSuccessScreen(savedData.fullName);
+        }
+
+        // Form submission logic
         document.getElementById('studentForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const nom = document.getElementById('nom').value.trim();
             const prenom = document.getElementById('prenom').value.trim();
+            const fullName = prenom + " " + nom;
 
+            // Save state in browser memory
+            sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
+
+            showSuccessScreen(fullName);
+        });
+
+        function showSuccessScreen(studentName) {
             document.getElementById('formContainer').classList.add('hidden');
+            document.getElementById('topNav').classList.add('hidden');
+            document.getElementById('pageSubTitle').innerText = "Présence validée";
+            
             document.getElementById('successContainer').classList.remove('hidden');
 
-            document.getElementById('studentNameDisplay').innerText = prenom + " " + nom;
+            document.getElementById('studentNameDisplay').innerText = studentName;
             document.getElementById('summaryCours').innerText = cours;
             document.getElementById('summaryDate').innerText = date;
             document.getElementById('summaryHeure').innerText = heure;
             document.getElementById('summaryEnseignant').innerText = enseignant;
-        });
+        }
 
-        // Warning Modal Logic
+        // Modal functions
         function showWarningModal() {
             document.getElementById('warningModal').classList.remove('hidden');
         }
@@ -217,8 +233,7 @@
         }
 
         function confirmRedirect() {
-            // توجيه المستخدم أو إعادة تحميل الصفحة
-            location.reload();
+            window.location.replace("about:blank");
         }
     </script>
 </body>
