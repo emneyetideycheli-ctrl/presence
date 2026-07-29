@@ -20,17 +20,17 @@
             
             <div class="flex items-center">
                 <div class="w-11 h-11 rounded-full overflow-hidden border border-purple-200 shadow-sm flex items-center justify-center bg-white">
-                    <img src="Safia.png" alt="SAFIA" class="w-full h-full object-cover">
+                    <img src="images/safia.jpg" alt="SAFIA" class="w-full h-full object-cover">
                 </div>
             </div>
 
             <div class="flex items-center gap-2">
                 <div class="w-11 h-11 rounded-full overflow-hidden border border-gray-200 shadow-sm flex items-center justify-center bg-white">
-                    <img src="Mauritanie.png" alt="Mauritanie" class="w-full h-full object-cover">
+                    <img src="images/mauritania.jpg" alt="Mauritanie" class="w-full h-full object-cover">
                 </div>
 
                 <div class="w-11 h-11 rounded-full overflow-hidden border border-sky-200 shadow-sm flex items-center justify-center bg-white">
-                    <img src="Unicef.png" alt="UNICEF" class="w-full h-full object-cover">
+                    <img src="images/unicef.jpg" alt="UNICEF" class="w-full h-full object-cover">
                 </div>
             </div>
 
@@ -209,7 +209,6 @@
         document.getElementById('dateDisplay').innerText = date;
         document.getElementById('heureDisplay').innerText = heure;
 
-        // التحقق مما إذا كان الطالب قد سجل حضوره بالفعل في هذه الجلسة
         const sessionKey = 'presence_done_' + id + '_' + date + '_' + heure;
         if (sessionStorage.getItem(sessionKey)) {
             const savedData = JSON.parse(sessionStorage.getItem(sessionKey));
