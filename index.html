@@ -14,33 +14,37 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-start pt-4 px-4 pb-12 relative">
+<body class="min-h-screen flex flex-col items-center justify-start pt-3 px-4 pb-12 relative">
 
-    <!-- 🌟 TOP HEADER LOGOS (الشعارات الدائرية في الأعلى) -->
-    <header class="w-full max-w-sm flex items-center justify-between mb-4 px-1">
-        <!-- جهة اليمين: أيقونة SAFIA وحدها -->
-        <div class="flex items-center">
-            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-200 shadow-sm flex items-center justify-center bg-white">
-                <img src="safia.jpg" alt="SAFIA Logo" class="w-full h-full object-cover">
-            </div>
-        </div>
-
-        <!-- جهة اليسار: أيقونتا موريتانيا واليونيسف معاً -->
-        <div class="flex items-center gap-2">
-            <!-- أيقونة الجمهورية الإسلامية الموريتانية -->
-            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-100 shadow-sm flex items-center justify-center bg-white">
-                <img src="mauritania.jpg" alt="Mauritanie" class="w-full h-full object-cover">
+    <!-- 🌟 TOP HEADER CONTAINER (شريط الشعار العلوي مثل التصميم المطلوب) -->
+    <div class="w-full max-w-sm mb-4">
+        <header class="w-full bg-white rounded-2xl p-3 shadow-sm border border-gray-100 flex items-center justify-between">
+            
+            <!-- 👈 جهة اليسار: أيقونة SAFIA وحدها -->
+            <div class="flex items-center">
+                <div class="w-11 h-11 rounded-full overflow-hidden border border-purple-200 shadow-sm flex items-center justify-center bg-white">
+                    <img src="safia.jpg" alt="SAFIA" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='safia.png';">
+                </div>
             </div>
 
-            <!-- أيقونة اليونيسف -->
-            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-sky-100 shadow-sm flex items-center justify-center bg-[#00adef]">
-                <img src="unicef.jpg" alt="UNICEF Logo" class="w-full h-full object-cover">
-            </div>
-        </div>
-    </header>
+            <!-- 👉 جهة اليمين: أيقونتا موريتانيا واليونيسف معاً -->
+            <div class="flex items-center gap-2">
+                <!-- الجمهورية الإسلامية الموريتانية -->
+                <div class="w-11 h-11 rounded-full overflow-hidden border border-gray-200 shadow-sm flex items-center justify-center bg-white">
+                    <img src="mauritania.jpg" alt="Mauritanie" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='mauritania.png';">
+                </div>
 
-    <!-- Top Navigation Link (زر الخروج العلوي) -->
-    <div id="topNav" class="w-full max-w-sm flex items-center justify-start mb-4">
+                <!-- UNICEF -->
+                <div class="w-11 h-11 rounded-full overflow-hidden border border-sky-200 shadow-sm flex items-center justify-center bg-[#00adef]">
+                    <img src="unicef.jpg" alt="UNICEF" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='unicef.png';">
+                </div>
+            </div>
+
+        </header>
+    </div>
+
+    <!-- Top Navigation Link (زر الخروج) -->
+    <div id="topNav" class="w-full max-w-sm flex items-center justify-start mb-3">
         <button type="button" onclick="showWarningModal()" class="text-purple-800 font-semibold text-sm flex items-center gap-1 hover:underline outline-none">
             <span class="text-base">←</span> Quitter
         </button>
@@ -162,7 +166,6 @@
         <!-- 2️⃣ SUCCESS CONTAINER (شاشة التأكيد النهائية) -->
         <div id="successContainer" class="hidden w-full bg-white rounded-3xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-gray-100 text-center flex flex-col items-center">
             
-            <!-- Check Icon -->
             <div class="my-4">
                 <div class="w-16 h-16 bg-purple-700 rounded-2xl flex items-center justify-center shadow-md shadow-purple-200">
                     <svg class="w-10 h-10 text-white stroke-[3.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,13 +174,10 @@
                 </div>
             </div>
 
-            <!-- Title -->
             <h2 class="text-2xl font-bold text-purple-900 mb-3">Présence enregistrée !</h2>
 
-            <!-- Student Full Name -->
             <p id="studentNameDisplay" class="text-gray-700 font-bold text-lg mb-2">...</p>
 
-            <!-- Details -->
             <p class="text-gray-600 text-sm font-medium mb-1">
                 <span id="summaryCours">...</span> — <span id="summaryDate">...</span> à <span id="summaryHeure">...</span>
             </p>
@@ -186,7 +186,6 @@
                 Enseignant : <span id="summaryEnseignant">...</span>
             </p>
 
-            <!-- Note Info -->
             <div class="bg-purple-50 text-purple-800 rounded-2xl p-4 text-xs font-semibold leading-relaxed border border-purple-100 w-full">
                 🔒 Votre présence a été validée avec succès. Vous pouvez fermer cette page.
             </div>
@@ -230,21 +229,18 @@
         const date = urlParams.get('date') || '-';
         const heure = urlParams.get('heure') || '-';
 
-        // Display data
         document.getElementById('coursDisplay').innerText = cours;
         document.getElementById('enseignantDisplay').innerText = enseignant;
         document.getElementById('cohorteDisplay').innerText = cohorte;
         document.getElementById('dateDisplay').innerText = date;
         document.getElementById('heureDisplay').innerText = heure;
 
-        // Check if attendance was already submitted in this session
         const sessionKey = 'presence_done_' + id + '_' + date + '_' + heure;
         if (sessionStorage.getItem(sessionKey)) {
             const savedData = JSON.parse(sessionStorage.getItem(sessionKey));
             showSuccessScreen(savedData.fullName);
         }
 
-        // Form submission logic
         document.getElementById('studentForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -252,9 +248,7 @@
             const prenom = document.getElementById('prenom').value.trim();
             const fullName = prenom + " " + nom;
 
-            // Save state in browser memory
             sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
-
             showSuccessScreen(fullName);
         });
 
@@ -272,7 +266,6 @@
             document.getElementById('summaryEnseignant').innerText = enseignant;
         }
 
-        // Modal functions
         function showWarningModal() {
             document.getElementById('warningModal').classList.remove('hidden');
         }
