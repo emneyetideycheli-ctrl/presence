@@ -61,11 +61,11 @@
         <!-- Top Purple Divider Line -->
         <div class="w-full h-[3px] bg-gradient-to-r from-purple-900 via-purple-600 to-purple-800 rounded-full mb-6"></div>
 
-        <!-- 1️⃣ FORM CONTAINER (تم تعطيل autocomplete نهائياً) -->
+        <!-- 1️⃣ FORM CONTAINER -->
         <form id="teacherForm" class="w-full space-y-4" autocomplete="off">
             
             <div>
-                <label class="block text-xs font-bold text-[#1e293b] mb-1.5 uppercase tracking-wider">Cours *</label>
+                <label class="block text-xs font-bold text-[#1e293b] mb-1.5 uppercase tracking-wider">Spécialité *</label>
                 <div class="relative">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-base">📚</span>
                     <input type="text" id="cours" name="cours_field" placeholder="Ex: Couture, Informatique..." required autocomplete="off" 
@@ -74,9 +74,9 @@
             </div>
 
             <div>
-                <label class="block text-xs font-bold text-[#1e293b] mb-1.5 uppercase tracking-wider">Enseignant *</label>
+                <label class="block text-xs font-bold text-[#1e293b] mb-1.5 uppercase tracking-wider">Formatrice *</label>
                 <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-base">👨‍🏫</span>
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-base">👩‍🏫</span>
                     <input type="text" id="enseignant" name="teacher_field" placeholder="Votre nom complet" required autocomplete="off" 
                            class="w-full pl-10 pr-3.5 py-3 text-sm bg-slate-50 border border-gray-200 rounded-2xl focus:bg-white focus:border-purple-600 focus:ring-4 focus:ring-purple-100 outline-none transition font-medium text-gray-800">
                 </div>
@@ -85,9 +85,13 @@
             <div>
                 <label class="block text-xs font-bold text-[#1e293b] mb-1.5 uppercase tracking-wider">Cohorte *</label>
                 <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-base">🎯</span>
-                    <input type="text" id="cohorte" name="cohorte_field" placeholder="Ex: C1, C2..." required autocomplete="off" 
-                           class="w-full pl-10 pr-3.5 py-3 text-sm bg-slate-50 border border-gray-200 rounded-2xl focus:bg-white focus:border-purple-600 focus:ring-4 focus:ring-purple-100 outline-none transition font-medium text-gray-800">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-base z-10">🎯</span>
+                    <select id="cohorte" name="cohorte_field" required 
+                            class="w-full pl-10 pr-3.5 py-3 text-sm bg-slate-50 border border-gray-200 rounded-2xl focus:bg-white focus:border-purple-600 focus:ring-4 focus:ring-purple-100 outline-none transition font-medium text-gray-800 cursor-pointer appearance-none">
+                        <option value="" disabled selected>— Sélectionnez votre cohorte —</option>
+                        <option value="C7.A">C7.A</option>
+                        <option value="C7.B">C7.B</option>
+                    </select>
                 </div>
             </div>
 
@@ -175,7 +179,7 @@
 
             const cours = document.getElementById('cours').value.trim();
             const enseignant = document.getElementById('enseignant').value.trim();
-            const cohorte = document.getElementById('cohorte').value.trim();
+            const cohorte = document.getElementById('cohorte').value;
             const date = document.getElementById('date').value;
             const heure = document.getElementById('heure').value;
 
@@ -196,7 +200,7 @@
             });
 
             document.getElementById('summaryCours').innerText = cours;
-            document.getElementById('summaryEnseignant').innerText = "Enseignant(e): " + enseignant;
+            document.getElementById('summaryEnseignant').innerText = "Formatrice: " + enseignant;
             document.getElementById('summaryCohorte').innerText = cohorte;
             document.getElementById('summaryDateTime').innerText = `${date} à ${heure}`;
 
