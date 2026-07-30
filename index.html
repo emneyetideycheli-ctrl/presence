@@ -16,16 +16,16 @@
 </head>
 <body class="min-h-screen flex items-center justify-center py-4 px-2 sm:px-4">
 
-    <!-- 🌟 MAIN CONTAINER WITH ROUNDED CORNERS (الإطار الخارجي المنحني بالكامل) -->
+    <!-- 🌟 MAIN CONTAINER WITH ROUNDED CORNERS -->
     <div class="w-full max-w-md bg-white rounded-[32px] shadow-xl border border-gray-100 p-4 sm:p-6 flex flex-col items-center relative overflow-hidden">
 
-        <!-- 🏢 CENTER NAME BANNER (شريط اسم المركز) -->
+        <!-- 🏢 CENTER NAME BANNER -->
         <div class="w-full bg-gradient-to-r from-purple-900 via-purple-700 to-purple-900 text-white rounded-2xl py-2.5 px-4 shadow-sm mb-3 flex items-center justify-center gap-2 border border-purple-300/30">
             <span class="text-amber-300 text-sm">📍</span>
             <span class="text-xs sm:text-sm font-extrabold tracking-wide uppercase">Centre SAFIA — Dar Naim</span>
         </div>
 
-        <!-- 🌟 TOP HEADER CONTAINER (شريط الشعار العلوي) -->
+        <!-- 🌟 TOP HEADER CONTAINER -->
         <header class="w-full bg-white rounded-2xl p-2 shadow-sm border border-gray-100 flex items-center justify-between mb-4">
             
             <!-- 👈 جهة اليسار: شعار SAFIA -->
@@ -77,18 +77,13 @@
 
                 <div class="space-y-3">
                     <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-purple-100">
-                        <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">📚 Cours</span>
+                        <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">📚 Spécialité</span>
                         <p id="coursDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
 
                     <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-purple-100">
-                        <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">👨‍🏫 Enseignant</span>
+                        <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">👩‍🏫 Formatrice</span>
                         <p id="enseignantDisplay" class="text-base font-bold text-[#1e293b]">...</p>
-                    </div>
-
-                    <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-purple-100">
-                        <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">🎯 Cohorte</span>
-                        <p id="cohorteDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
 
                     <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-purple-100">
@@ -131,10 +126,21 @@
                                class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
                     </div>
 
+                    <!-- 🎯 قائمة الخيارات لاختيار الـ Cohorte -->
+                    <div>
+                        <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Cohorte *</label>
+                        <select id="cohorteSelect" required 
+                                class="w-full p-3.5 text-sm bg-[#f1f5f9] border border-gray-200 rounded-2xl text-gray-700 outline-none cursor-pointer font-medium focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition">
+                            <option value="" disabled selected>— Sélectionnez votre cohorte —</option>
+                            <option value="C7.A">C7.A</option>
+                            <option value="C7.B">C7.B</option>
+                        </select>
+                    </div>
+
                     <div>
                         <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Genre *</label>
                         <select id="genre" required 
-                                class="w-full p-3.5 text-sm bg-[#f1f5f9] border border-gray-200 rounded-2xl text-gray-700 outline-none cursor-pointer font-medium">
+                                class="w-full p-3.5 text-sm bg-[#f1f5f9] border border-gray-200 rounded-2xl text-gray-700 outline-none cursor-pointer font-medium focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition">
                             <option value="" disabled selected>— Sélectionnez —</option>
                             <option value="Femme">Femme</option>
                             <option value="Homme">Homme</option>
@@ -177,7 +183,7 @@
             </p>
 
             <p class="text-gray-400 text-xs font-normal mb-6">
-                Enseignant : <span id="summaryEnseignant">...</span>
+                Formatrice : <span id="summaryEnseignant">...</span>
             </p>
 
             <div class="bg-purple-50 text-purple-800 rounded-2xl p-4 text-xs font-semibold leading-relaxed border border-purple-100 w-full">
@@ -197,7 +203,7 @@
             <h3 class="text-xl font-bold text-gray-800 mb-2">Attention !</h3>
             
             <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium">
-                Il est strictly interdit d'enregistrer la présence d'une personne absente.
+                Il est strictement interdit d'enregistrer la présence d'une personne absente.
             </p>
 
             <div class="flex flex-col gap-2.5">
@@ -214,7 +220,6 @@
     </div>
 
     <script>
-        // 🔗 تم إدراج رابط Google Apps Script الخاص بك هنا
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxgs-6zJzQinE-G3m0HiNmH4BstkYMWdR8d23ksxN77DGQFcTUBuTJkHJO2dEMHd-rMwQ/exec";
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -222,13 +227,11 @@
         const id = urlParams.get('id') || 'default';
         const cours = urlParams.get('cours') || '-';
         const enseignant = urlParams.get('enseignant') || '-';
-        const cohorte = urlParams.get('cohorte') || '-';
         const date = urlParams.get('date') || '-';
         const heure = urlParams.get('heure') || '-';
 
         document.getElementById('coursDisplay').innerText = cours;
         document.getElementById('enseignantDisplay').innerText = enseignant;
-        document.getElementById('cohorteDisplay').innerText = cohorte;
         document.getElementById('dateDisplay').innerText = date;
         document.getElementById('heureDisplay').innerText = heure;
 
@@ -248,6 +251,7 @@
             const nom = document.getElementById('nom').value.trim();
             const prenom = document.getElementById('prenom').value.trim();
             const numero = document.getElementById('numero').value.trim();
+            const cohorte = document.getElementById('cohorteSelect').value;
             const genre = document.getElementById('genre').value;
             const fullName = prenom + " " + nom;
 
@@ -264,7 +268,6 @@
                 genre: genre
             };
 
-            // إرسال البيانات فورياً إلى Google Sheets
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
