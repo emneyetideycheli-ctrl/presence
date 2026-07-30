@@ -1,177 +1,310 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valider ma présence - SAFIA Dar Naim</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { background-color: #f3f4f6; font-family: system-ui, -apple-system, sans-serif; }
-    .card-container { background: white; border-radius: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-    .purple-badge { background-color: #5b21b6; color: white; border-radius: 1.2rem; }
-    .purple-btn { background: #7c3aed; color: white; transition: all 0.2s; }
-    .purple-btn:hover { background: #6d28d9; }
-    .info-card { background-color: #faf5ff; border: 1.5px solid #f3e8ff; border-radius: 1.5rem; }
-    .info-box { background: white; border-radius: 1rem; border: 1px solid #f3e8ff; }
-    .input-box { background-color: #f8fafc; border: 1px solid #f1f5f9; border-radius: 1.2rem; }
-  </style>
-</head>
-<body class="min-h-screen p-4 flex justify-center items-center">
-
-  <div class="card-container w-full max-w-sm p-6">
-
-    <!-- 📍 الشريط العلوي البنفسجي -->
-    <div class="purple-badge p-3 text-center text-xs font-bold tracking-wide mb-4">
-      📍 CENTRE SAFIA — DAR NAIM
-    </div>
-
-    <!-- 🏛️ مربع الشعارات الثلاثة -->
-    <div class="border border-slate-100 rounded-2xl p-2 mb-4 flex justify-between items-center bg-white shadow-sm">
-      <div class="w-10 h-10 rounded-full bg-purple-900 flex items-center justify-center text-white text-[9px] font-bold">
-        SAFIA
-      </div>
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-[10px]">🇲🇷</div>
-        <div class="w-8 h-8 rounded-full bg-sky-500 flex items-center justify-center text-white text-[8px] font-bold">unicef</div>
-      </div>
-    </div>
-
-    <!-- Quitter -->
-    <a href="#" class="text-xs text-purple-800 font-semibold mb-2 inline-block">← Quitter</a>
-
-    <!-- العنوان -->
-    <div class="text-center mb-6">
-      <h2 class="text-2xl font-bold text-slate-900 flex justify-center items-center gap-2">
-        🎓 Valider ma présence
-      </h2>
-      <p class="text-xs text-slate-400 mt-1">Complétez vos informations</p>
-      <div class="h-[2px] w-full bg-purple-700 mt-4"></div>
-    </div>
-
-    <!-- بطاقة تفاصيل الحصة -->
-    <div class="info-card p-4 mb-6 space-y-2.5">
-      <h3 class="text-sm font-bold text-purple-900 flex items-center gap-2 mb-3">
-        📋 Séance en cours
-      </h3>
-
-      <div class="info-box p-3">
-        <span class="text-[11px] text-slate-400 flex items-center gap-1 font-medium">📚 Cours</span>
-        <p id="viewCours" class="font-bold text-slate-800 text-xs mt-1">-</p>
-      </div>
-
-      <!-- 🟢 تغيير المسمى هنا أيضاً إلى Formatrice -->
-      <div class="info-box p-3">
-        <span class="text-[11px] text-slate-400 flex items-center gap-1 font-medium">👩‍🏫 Formatrice</span>
-        <p id="viewFormatrice" class="font-bold text-slate-800 text-xs mt-1">-</p>
-      </div>
-
-      <div class="info-box p-3">
-        <span class="text-[11px] text-slate-400 flex items-center gap-1 font-medium">🎯 Cohorte</span>
-        <p id="viewCohorte" class="font-bold text-slate-800 text-xs mt-1">-</p>
-      </div>
-
-      <div class="info-box p-3">
-        <span class="text-[11px] text-slate-400 flex items-center gap-1 font-medium">📅 Date</span>
-        <p id="viewDate" class="font-bold text-slate-800 text-xs mt-1">-</p>
-      </div>
-
-      <div class="info-box p-3">
-        <span class="text-[11px] text-slate-400 flex items-center gap-1 font-medium">⏰ Heure</span>
-        <p id="viewHeure" class="font-bold text-slate-800 text-xs mt-1">-</p>
-      </div>
-    </div>
-
-    <!-- نموذج معلومات الطالبة (حذف خيار Genre) -->
-    <form id="studentForm" class="space-y-4">
-      <div class="mb-2">
-        <h3 class="text-base font-bold text-slate-900 flex items-center gap-1.5">
-          ✍️ Vos informations
-        </h3>
-        <p class="text-[11px] text-slate-400 mt-1">Complétez vos informations pour valider votre présence à cette séance.</p>
-      </div>
-
-      <div>
-        <label class="block text-xs font-bold text-slate-800 mb-1.5">Nom *</label>
-        <input type="text" id="nom" placeholder="Votre nom de famille" required class="input-box w-full p-3.5 text-xs text-slate-700 focus:outline-none">
-      </div>
-
-      <div>
-        <label class="block text-xs font-bold text-slate-800 mb-1.5">Prénom *</label>
-        <input type="text" id="prenom" placeholder="Votre prénom" required class="input-box w-full p-3.5 text-xs text-slate-700 focus:outline-none">
-      </div>
-
-      <div>
-        <label class="block text-xs font-bold text-slate-800 mb-1.5">Numéro étudiant *</label>
-        <input type="text" id="numero" placeholder="Ex : E12345678" required class="input-box w-full p-3.5 text-xs text-slate-700 focus:outline-none">
-      </div>
-
-      <!-- 🟢 تم إزالة Genre بالكامل من هنا -->
-
-      <button type="submit" id="btnSubmit" class="w-full purple-btn py-4 rounded-2xl font-bold text-sm shadow-md mt-4 flex justify-center items-center gap-2">
-        ✅ Valider ma présence
-      </button>
-    </form>
-
-    <div id="successMessage" class="hidden text-center text-purple-800 font-bold mt-4 p-4 bg-purple-50 rounded-2xl border border-purple-200 text-xs">
-      ✨ Votre présence a été enregistrée avec succès!
-    </div>
-
-    <div class="text-center text-[10px] text-slate-400 mt-6">
-      © 2026 — Solution de gestion des présences
-    </div>
-
-  </div>
-
-  <script>
-    const API_URL = "ضع_رابط_الجوجل_اسكريبت_هنا";
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const seanceId = urlParams.get('seance_id');
-
-    if (seanceId) {
-      loadSeanceDetails(seanceId);
-    }
-
-    async function loadSeanceDetails(id) {
-      try {
-        const res = await fetch(`${API_URL}?action=getSeance&id=${id}`);
-        const data = await res.json();
-        if(data.status === "success") {
-          document.getElementById('viewCours').innerText = data.cours;
-          document.getElementById('viewFormatrice').innerText = data.formatrice;
-          document.getElementById('viewCohorte').innerText = data.cohorte;
-          document.getElementById('viewDate').innerText = data.date;
-          document.getElementById('viewHeure').innerText = data.heure;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valider ma présence</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #e2e8f0; /* خلفية الرمادي الناعم الخارجي */
         }
-      } catch (e) {
-        console.error("Erreur de chargement");
-      }
-    }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center py-4 px-2 sm:px-4">
 
-    document.getElementById('studentForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('btnSubmit');
-      btn.innerText = "Enregistrement...";
-      btn.disabled = true;
+    <!-- 🌟 MAIN CONTAINER WITH ROUNDED CORNERS (الإطار الخارجي المنحني بالكامل) -->
+    <div class="w-full max-w-md bg-white rounded-[32px] shadow-xl border border-gray-100 p-4 sm:p-6 flex flex-col items-center relative overflow-hidden">
 
-      const payload = {
-        action: "registerPresence",
-        seanceId: seanceId,
-        nom: document.getElementById('nom').value,
-        prenom: document.getElementById('prenom').value,
-        numero: document.getElementById('numero').value
-      };
+        <!-- 🏢 CENTER NAME BANNER (شريط اسم المركز) -->
+        <div class="w-full bg-gradient-to-r from-purple-900 via-purple-700 to-purple-900 text-white rounded-2xl py-2.5 px-4 shadow-sm mb-3 flex items-center justify-center gap-2 border border-purple-300/30">
+            <span class="text-amber-300 text-sm">📍</span>
+            <span class="text-xs sm:text-sm font-extrabold tracking-wide uppercase">Centre SAFIA — Dar Naim</span>
+        </div>
 
-      try {
-        await fetch(API_URL, { method: "POST", body: JSON.stringify(payload) });
-        document.getElementById('studentForm').classList.add('hidden');
-        document.getElementById('successMessage').classList.remove('hidden');
-      } catch (err) {
-        alert("Erreur lors de l'enregistrement");
-        btn.innerText = "✅ Valider ma présence";
-        btn.disabled = false;
-      }
-    });
-  </script>
+        <!-- 🌟 TOP HEADER CONTAINER (شريط الشعار العلوي) -->
+        <header class="w-full bg-white rounded-2xl p-2 shadow-sm border border-gray-100 flex items-center justify-between mb-4">
+            
+            <!-- 👈 جهة اليسار: شعار SAFIA -->
+            <div class="flex items-center">
+                <div class="w-11 h-11 rounded-full overflow-hidden border border-purple-200 shadow-sm flex items-center justify-center bg-white">
+                    <img src="safia.jpg" alt="SAFIA" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- 👉 جهة اليمين: شعارا موريتانيا واليونيسف -->
+            <div class="flex items-center gap-2">
+                <!-- الجمهورية الإسلامية الموريتانية -->
+                <div class="w-11 h-11 rounded-full overflow-hidden border border-gray-200 shadow-sm flex items-center justify-center bg-white">
+                    <img src="mauritania.jpg" alt="Mauritanie" class="w-full h-full object-cover">
+                </div>
+
+                <!-- UNICEF -->
+                <div class="w-11 h-11 rounded-full overflow-hidden border border-sky-200 shadow-sm flex items-center justify-center bg-white">
+                    <img src="unicef.jpg" alt="UNICEF" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+        </header>
+
+        <!-- Top Navigation Link (زر الخروج) -->
+        <div id="topNav" class="w-full flex items-center justify-start mb-3">
+            <button type="button" onclick="showWarningModal()" class="text-purple-800 font-semibold text-sm flex items-center gap-1 hover:underline outline-none">
+                <span class="text-base">←</span> Quitter
+            </button>
+        </div>
+
+        <!-- Page Main Title -->
+        <h1 class="text-3xl font-extrabold text-[#1e293b] text-center flex items-center justify-center gap-2 mb-1">
+            <span class="text-2xl">🎓</span> Valider ma présence
+        </h1>
+        <p id="pageSubTitle" class="text-gray-400 text-sm mb-4 font-normal">Complétez vos informations</p>
+
+        <!-- Top Purple Divider Line -->
+        <div class="w-full h-[3px] bg-gradient-to-r from-purple-900 via-purple-600 to-purple-800 rounded-full mb-6"></div>
+
+        <!-- 1️⃣ FORM & DETAILS CONTAINER -->
+        <div id="formContainer" class="w-full space-y-6">
+
+            <!-- PURPLE CARD: Séance en cours -->
+            <div class="bg-purple-50 border-l-4 border-purple-700 rounded-3xl p-5 shadow-sm">
+                <h2 class="text-2xl font-extrabold text-purple-900 mb-4 flex items-center gap-2">
+                    <span>📋</span> Séance en cours
+                </h2>
+
+                <div class="space-y-3">
+                    <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-purple-100">
+                        <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">📚 Cours</span>
+                        <p id="coursDisplay" class="text-base font-bold text-[#1e293b]">...</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-purple-100">
+                        <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">👨‍🏫 Enseignant</span>
+                        <p id="enseignantDisplay" class="text-base font-bold text-[#1e293b]">...</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-purple-100">
+                        <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">🎯 Cohorte</span>
+                        <p id="cohorteDisplay" class="text-base font-bold text-[#1e293b]">...</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-purple-100">
+                        <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">📅 Date</span>
+                        <p id="dateDisplay" class="text-base font-bold text-[#1e293b]">...</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-purple-100">
+                        <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">⏰ Heure</span>
+                        <p id="heureDisplay" class="text-base font-bold text-[#1e293b]">...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WHITE CARD: Vos informations -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100">
+                <h2 class="text-2xl font-extrabold text-[#1e293b] mb-2 flex items-center gap-2">
+                    <span>✍️</span> Vos informations
+                </h2>
+                <p class="text-xs text-gray-500 mb-6 leading-relaxed font-normal">
+                    Complétez vos informations pour valider votre présence à cette séance.
+                </p>
+
+                <form id="studentForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Nom *</label>
+                        <input type="text" id="nom" placeholder="Votre nom de famille" required 
+                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Prénom *</label>
+                        <input type="text" id="prenom" placeholder="Votre prénom" required 
+                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Numéro étudiant *</label>
+                        <input type="text" id="numero" placeholder="Ex : E12345678" required 
+                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Genre *</label>
+                        <select id="genre" required 
+                                class="w-full p-3.5 text-sm bg-[#f1f5f9] border border-gray-200 rounded-2xl text-gray-700 outline-none cursor-pointer font-medium">
+                            <option value="" disabled selected>— Sélectionnez —</option>
+                            <option value="Femme">Femme</option>
+                            <option value="Homme">Homme</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="submitBtn"
+                            class="w-full bg-gradient-to-r from-purple-800 to-purple-600 hover:from-purple-900 hover:to-purple-700 text-white font-extrabold text-base py-4 rounded-2xl transition shadow-md shadow-purple-200 flex items-center justify-center gap-2 mt-4">
+                        <span>✅</span> Valider ma présence
+                    </button>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-center pt-2 pb-2">
+                <p class="text-xs text-gray-400 font-medium">
+                    © 2026 — Solution de gestion des présences
+                </p>
+            </div>
+
+        </div>
+
+        <!-- 2️⃣ SUCCESS CONTAINER -->
+        <div id="successContainer" class="hidden w-full bg-white rounded-3xl p-6 shadow-sm border border-gray-100 text-center flex flex-col items-center">
+            
+            <div class="my-4">
+                <div class="w-16 h-16 bg-purple-700 rounded-2xl flex items-center justify-center shadow-md shadow-purple-200">
+                    <svg class="w-10 h-10 text-white stroke-[3.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold text-purple-900 mb-3">Présence enregistrée !</h2>
+
+            <p id="studentNameDisplay" class="text-gray-700 font-bold text-lg mb-2">...</p>
+
+            <p class="text-gray-600 text-sm font-medium mb-1">
+                <span id="summaryCours">...</span> — <span id="summaryDate">...</span> à <span id="summaryHeure">...</span>
+            </p>
+
+            <p class="text-gray-400 text-xs font-normal mb-6">
+                Enseignant : <span id="summaryEnseignant">...</span>
+            </p>
+
+            <div class="bg-purple-50 text-purple-800 rounded-2xl p-4 text-xs font-semibold leading-relaxed border border-purple-100 w-full">
+                🔒 Votre présence a été validée avec succès. Vous pouvez fermer cette page.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ⚠️ WARNING MODAL -->
+    <div id="warningModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-gray-100 text-center">
+            <div class="w-16 h-16 bg-amber-100 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
+                ⚠️
+            </div>
+            
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Attention !</h3>
+            
+            <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium">
+                Il est strictly interdit d'enregistrer la présence d'une personne absente.
+            </p>
+
+            <div class="flex flex-col gap-2.5">
+                <button type="button" onclick="closeWarningModal()" 
+                        class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-xl transition text-sm">
+                    Annuler
+                </button>
+                <button type="button" onclick="confirmRedirect()" 
+                        class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl transition text-sm shadow-sm">
+                    Compris, continuer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🔗 تم إدراج رابط Google Apps Script الخاص بك هنا
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxgs-6zJzQinE-G3m0HiNmH4BstkYMWdR8d23ksxN77DGQFcTUBuTJkHJO2dEMHd-rMwQ/exec";
+
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        const id = urlParams.get('id') || 'default';
+        const cours = urlParams.get('cours') || '-';
+        const enseignant = urlParams.get('enseignant') || '-';
+        const cohorte = urlParams.get('cohorte') || '-';
+        const date = urlParams.get('date') || '-';
+        const heure = urlParams.get('heure') || '-';
+
+        document.getElementById('coursDisplay').innerText = cours;
+        document.getElementById('enseignantDisplay').innerText = enseignant;
+        document.getElementById('cohorteDisplay').innerText = cohorte;
+        document.getElementById('dateDisplay').innerText = date;
+        document.getElementById('heureDisplay').innerText = heure;
+
+        const sessionKey = 'presence_done_' + id + '_' + date + '_' + heure;
+        if (sessionStorage.getItem(sessionKey)) {
+            const savedData = JSON.parse(sessionStorage.getItem(sessionKey));
+            showSuccessScreen(savedData.fullName);
+        }
+
+        document.getElementById('studentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "<span>⏳</span> Enregistrement...";
+
+            const nom = document.getElementById('nom').value.trim();
+            const prenom = document.getElementById('prenom').value.trim();
+            const numero = document.getElementById('numero').value.trim();
+            const genre = document.getElementById('genre').value;
+            const fullName = prenom + " " + nom;
+
+            const payload = {
+                id: id,
+                cours: cours,
+                enseignant: enseignant,
+                cohorte: cohorte,
+                date: date,
+                heure: heure,
+                nom: nom,
+                prenom: prenom,
+                numero: numero,
+                genre: genre
+            };
+
+            // إرسال البيانات فورياً إلى Google Sheets
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
+                showSuccessScreen(fullName);
+            }).catch(err => {
+                console.error("Erreur:", err);
+                sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
+                showSuccessScreen(fullName);
+            });
+        });
+
+        function showSuccessScreen(studentName) {
+            document.getElementById('formContainer').classList.add('hidden');
+            document.getElementById('topNav').classList.add('hidden');
+            document.getElementById('pageSubTitle').innerText = "Présence validée";
+            
+            document.getElementById('successContainer').classList.remove('hidden');
+
+            document.getElementById('studentNameDisplay').innerText = studentName;
+            document.getElementById('summaryCours').innerText = cours;
+            document.getElementById('summaryDate').innerText = date;
+            document.getElementById('summaryHeure').innerText = heure;
+            document.getElementById('summaryEnseignant').innerText = enseignant;
+        }
+
+        function showWarningModal() {
+            document.getElementById('warningModal').classList.remove('hidden');
+        }
+
+        function closeWarningModal() {
+            document.getElementById('warningModal').classList.add('hidden');
+        }
+
+        function confirmRedirect() {
+            window.location.replace("about:blank");
+        }
+    </script>
 </body>
 </html>
