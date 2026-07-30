@@ -103,4 +103,171 @@
                     <div>
                         <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Prénom *</label>
                         <input type="text" id="prenom" placeholder="Votre prénom" required 
-                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus
+                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Numéro étudiant *</label>
+                        <input type="text" id="numero" placeholder="Ex : E12345678" required 
+                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
+                    </div>
+
+                    <button type="submit" id="submitBtn"
+                            class="w-full bg-gradient-to-r from-purple-800 to-purple-600 hover:from-purple-900 hover:to-purple-700 text-white font-extrabold text-base py-4 rounded-2xl transition shadow-md shadow-purple-200 flex items-center justify-center gap-2 mt-4">
+                        <span>✅</span> Valider ma présence
+                    </button>
+                </form>
+            </div>
+
+            <div class="text-center pt-2 pb-2">
+                <p class="text-xs text-gray-400 font-medium">
+                    © 2026 — Solution de gestion des présences
+                </p>
+            </div>
+
+        </div>
+
+        <div id="successContainer" class="hidden w-full bg-white rounded-3xl p-6 shadow-sm border border-gray-100 text-center flex flex-col items-center">
+            
+            <div class="my-4">
+                <div class="w-16 h-16 bg-purple-700 rounded-2xl flex items-center justify-center shadow-md shadow-purple-200">
+                    <svg class="w-10 h-10 text-white stroke-[3.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold text-purple-900 mb-3">Présence enregistrée !</h2>
+
+            <p id="studentNameDisplay" class="text-gray-700 font-bold text-lg mb-2">...</p>
+
+            <p class="text-gray-600 text-sm font-medium mb-1">
+                <span id="summaryCours">...</span> — <span id="summaryDate">...</span> à <span id="summaryHeure">...</span>
+            </p>
+
+            <p class="text-gray-400 text-xs font-normal mb-6">
+                Formatrice : <span id="summaryEnseignant">...</span>
+            </p>
+
+            <div class="bg-purple-50 text-purple-800 rounded-2xl p-4 text-xs font-semibold leading-relaxed border border-purple-100 w-full">
+                🔒 Votre présence a été validée avec succès. Vous pouvez fermer cette page.
+            </div>
+        </div>
+
+    </div>
+
+    <div id="warningModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-gray-100 text-center">
+            <div class="w-16 h-16 bg-amber-100 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
+                ⚠️
+            </div>
+            
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Attention !</h3>
+            
+            <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium">
+                Il est strictly interdit d'enregistrer la présence d'une personne absente.
+            </p>
+
+            <div class="flex flex-col gap-2.5">
+                <button type="button" onclick="closeWarningModal()" 
+                        class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-xl transition text-sm">
+                    Annuler
+                </button>
+                <button type="button" onclick="confirmRedirect()" 
+                        class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl transition text-sm shadow-sm">
+                    Compris, continuer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxgs-6zJzQinE-G3m0HiNmH4BstkYMWdR8d23ksxN77DGQFcTUBuTJkHJO2dEMHd-rMwQ/exec";
+
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        const id = urlParams.get('id') || 'default';
+        const cours = urlParams.get('cours') || '-';
+        const enseignant = urlParams.get('enseignant') || '-';
+        const date = urlParams.get('date') || '-';
+        const heure = urlParams.get('heure') || '-';
+
+        document.getElementById('coursDisplay').innerText = cours;
+        document.getElementById('enseignantDisplay').innerText = enseignant;
+        document.getElementById('dateDisplay').innerText = date;
+        document.getElementById('heureDisplay').innerText = heure;
+
+        const sessionKey = 'presence_done_' + id + '_' + date + '_' + heure;
+        if (sessionStorage.getItem(sessionKey)) {
+            const savedData = JSON.parse(sessionStorage.getItem(sessionKey));
+            showSuccessScreen(savedData.fullName);
+        }
+
+        document.getElementById('studentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "<span>⏳</span> Enregistrement...";
+
+            const nom = document.getElementById('nom').value.trim();
+            const prenom = document.getElementById('prenom').value.trim();
+            const numero = document.getElementById('numero').value.trim();
+            const fullName = prenom + " " + nom;
+
+            const payload = {
+                id: id,
+                cours: cours,
+                enseignant: enseignant,
+                cohorte: "",
+                date: date,
+                heure: heure,
+                nom: nom,
+                prenom: prenom,
+                numero: numero,
+                genre: ""
+            };
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
+                showSuccessScreen(fullName);
+            }).catch(err => {
+                console.error("Erreur:", err);
+                sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
+                showSuccessScreen(fullName);
+            });
+        });
+
+        function showSuccessScreen(studentName) {
+            document.getElementById('formContainer').classList.add('hidden');
+            document.getElementById('topNav').classList.add('hidden');
+            document.getElementById('pageSubTitle').innerText = "Présence validée";
+            
+            document.getElementById('successContainer').classList.remove('hidden');
+
+            document.getElementById('studentNameDisplay').innerText = studentName;
+            document.getElementById('summaryCours').innerText = cours;
+            document.getElementById('summaryDate').innerText = date;
+            document.getElementById('summaryHeure').innerText = heure;
+            document.getElementById('summaryEnseignant').innerText = enseignant;
+        }
+
+        function showWarningModal() {
+            document.getElementById('warningModal').classList.remove('hidden');
+        }
+
+        function closeWarningModal() {
+            document.getElementById('warningModal').classList.add('hidden');
+        }
+
+        function confirmRedirect() {
+            window.location.replace("about:blank");
+        }
+    </script>
+</body>
+</html>
