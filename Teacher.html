@@ -108,14 +108,12 @@
                 </form>
             </div>
 
-            <!-- عرض الـ QR Code البنفسجي المضمون والعملي 100% -->
+            <!-- عرض الـ QR Code -->
             <div id="qrResultContainer" class="hidden w-full bg-white rounded-3xl p-6 shadow-sm border border-purple-100 text-center flex flex-col items-center">
                 <h2 class="text-2xl font-bold text-purple-900 mb-1">Séance Prête !</h2>
                 <p class="text-xs text-gray-500 mb-5 font-normal">Faites scanner ce QR Code aux participantes :</p>
 
-                <!-- بطاقة الـ QR Code مع الهوية البصرية وشعار Safia بأعلى البطاقة -->
                 <div class="w-full max-w-[270px] bg-gradient-to-b from-purple-50 via-white to-purple-50 p-5 rounded-[32px] border-2 border-purple-200 shadow-md mb-6 flex flex-col items-center">
-                    
                     <div class="flex items-center gap-2 mb-3 bg-white px-3 py-1.5 rounded-full border border-purple-200 shadow-sm">
                         <img src="safia.jpg" alt="SAFIA" class="w-6 h-6 rounded-full object-cover">
                         <span class="text-xs font-bold text-purple-900">Centre SAFIA</span>
@@ -150,6 +148,7 @@
     <script>
         let currentTargetUrl = "";
 
+        // ضبط التاريخ والوقت تلقائياً
         const today = new Date();
         document.getElementById('date').value = today.toISOString().split('T')[0];
         document.getElementById('heure').value = today.toTimeString().slice(0, 5);
@@ -157,22 +156,31 @@
         document.getElementById('sessionForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const cours = encodeURIComponent(document.getElementById('cours').value);
-            const enseignant = encodeURIComponent(document.getElementById('enseignant').value.trim());
-            const cohorte = encodeURIComponent(document.getElementById('cohorte').value);
-            const date = encodeURIComponent(document.getElementById('date').value);
-            const heure = encodeURIComponent(document.getElementById('heure').value);
+            // 1. استخراج القيم وتنظيفها أولاً
+            const coursVal = document.getElementById('cours').value;
+            const enseignantVal = document.getElementById('enseignant').value.trim();
+            const cohorteVal = document.getElementById('cohorte').value;
+            const dateVal = document.getElementById('date').value;
+            const heureVal = document.getElementById('heure').value;
+
+            // 2. التشفير للرابط
+            const cours = encodeURIComponent(coursVal);
+            const enseignant = encodeURIComponent(enseignantVal);
+            const cohorte = encodeURIComponent(cohorteVal);
+            const date = encodeURIComponent(dateVal);
+            const heure = encodeURIComponent(heureVal);
             const id = 's_' + Date.now();
 
+            // 3. بناء الرابط المستهدف لصفحة الطالب
             const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + '/index.html';
             currentTargetUrl = `${baseUrl}?id=${id}&cours=${cours}&enseignant=${enseignant}&cohorte=${cohorte}&date=${date}&heure=${heure}`;
 
-            // QR Code بنفسجي نقي وواضح بدون أي عوائق في المسح
+            // 4. توليد الـ QR Code
             const qrApi = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&color=6b21a8&data=${encodeURIComponent(currentTargetUrl)}`;
-
             document.getElementById('qrCodeImg').src = qrApi;
 
-            document.getElementById('formBlock').classList.add('hidden');
+            // 5. تبديل الواجهة بعد ضمان سلامة الرابط
+            document.getElementById('formBlock').style.display = 'none';
             document.getElementById('qrResultContainer').classList.remove('hidden');
             document.getElementById('qrResultContainer').scrollIntoView({ behavior: 'smooth' });
         });
@@ -186,7 +194,7 @@
 
         function resetForm() {
             document.getElementById('qrResultContainer').classList.add('hidden');
-            document.getElementById('formBlock').classList.remove('hidden');
+            document.getElementById('formBlock').style.display = 'block';
             document.getElementById('sessionForm').reset();
             
             const today = new Date();
