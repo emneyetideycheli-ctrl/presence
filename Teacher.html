@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer une Séance - SAFIA Dar Naim</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Créer une Séance — Formatrice</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- QRCode.js Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body {
@@ -16,35 +13,28 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center py-6 px-3 sm:px-4">
+<body class="min-h-screen flex items-center justify-center py-4 px-2 sm:px-4">
 
-    <!-- 🌟 MAIN CONTAINER WITH ROUNDED CORNERS -->
-    <div class="w-full max-w-md bg-white rounded-[32px] shadow-xl border border-gray-100 p-5 sm:p-6 flex flex-col items-center relative overflow-hidden">
+    <div class="w-full max-w-md bg-white rounded-[32px] shadow-xl border border-gray-100 p-4 sm:p-6 flex flex-col items-center relative overflow-hidden">
 
-        <!-- 🏢 CENTER NAME BANNER -->
         <div class="w-full bg-gradient-to-r from-purple-900 via-purple-700 to-purple-900 text-white rounded-2xl py-2.5 px-4 shadow-sm mb-3 flex items-center justify-center gap-2 border border-purple-300/30">
             <span class="text-amber-300 text-sm">📍</span>
             <span class="text-xs sm:text-sm font-extrabold tracking-wide uppercase">Centre SAFIA — Dar Naim</span>
         </div>
 
-        <!-- 🌟 TOP HEADER CONTAINER -->
-        <header class="w-full bg-slate-50/80 rounded-2xl p-2 shadow-inner border border-gray-100 flex items-center justify-between mb-5">
+        <header class="w-full bg-white rounded-2xl p-2 shadow-sm border border-gray-100 flex items-center justify-between mb-4">
             
-            <!-- 👈 جهة اليسار: شعار SAFIA -->
             <div class="flex items-center">
                 <div class="w-11 h-11 rounded-full overflow-hidden border border-purple-200 shadow-sm flex items-center justify-center bg-white">
                     <img src="safia.jpg" alt="SAFIA" class="w-full h-full object-cover">
                 </div>
             </div>
 
-            <!-- 👉 جهة اليمين: شعارا موريتانيا واليونيسف -->
             <div class="flex items-center gap-2">
-                <!-- الجمهورية الإسلامية الموريتانية -->
                 <div class="w-11 h-11 rounded-full overflow-hidden border border-gray-200 shadow-sm flex items-center justify-center bg-white">
                     <img src="mauritania.jpg" alt="Mauritanie" class="w-full h-full object-cover">
                 </div>
 
-                <!-- UNICEF -->
                 <div class="w-11 h-11 rounded-full overflow-hidden border border-sky-200 shadow-sm flex items-center justify-center bg-white">
                     <img src="unicef.jpg" alt="UNICEF" class="w-full h-full object-cover">
                 </div>
@@ -52,116 +42,100 @@
 
         </header>
 
-        <!-- Page Main Title -->
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-[#1e293b] text-center flex items-center justify-center gap-2 mb-1">
-            <span>✨</span> Créer une Séance
+        <h1 class="text-3xl font-extrabold text-[#1e293b] text-center flex items-center justify-center gap-2 mb-1">
+            <span class="text-2xl">👩‍🏫</span> Créer une Séance
         </h1>
-        <p id="pageSubTitle" class="text-gray-400 text-xs sm:text-sm mb-4 font-normal text-center">Remplissez les détails de la séance</p>
+        <p id="pageSubTitle" class="text-gray-400 text-sm mb-4 font-normal">Espace Formatrice</p>
 
-        <!-- Top Purple Divider Line -->
         <div class="w-full h-[3px] bg-gradient-to-r from-purple-900 via-purple-600 to-purple-800 rounded-full mb-6"></div>
 
-        <!-- 1️⃣ FORM CONTAINER -->
-        <form id="teacherForm" class="w-full space-y-4" autocomplete="off">
-            
-            <div>
-                <label class="block text-xs font-bold text-[#1e293b] mb-1.5 uppercase tracking-wider">Spécialité *</label>
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-base">📚</span>
-                    <input type="text" id="cours" name="cours_field" placeholder="Ex: Couture, Informatique..." required autocomplete="off" 
-                           class="w-full pl-10 pr-3.5 py-3 text-sm bg-slate-50 border border-gray-200 rounded-2xl focus:bg-white focus:border-purple-600 focus:ring-4 focus:ring-purple-100 outline-none transition font-medium text-gray-800">
-                </div>
-            </div>
+        <div id="formContainer" class="w-full space-y-6">
 
-            <div>
-                <label class="block text-xs font-bold text-[#1e293b] mb-1.5 uppercase tracking-wider">Formatrice *</label>
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-base">👩‍🏫</span>
-                    <input type="text" id="enseignant" name="teacher_field" placeholder="Votre nom complet" required autocomplete="off" 
-                           class="w-full pl-10 pr-3.5 py-3 text-sm bg-slate-50 border border-gray-200 rounded-2xl focus:bg-white focus:border-purple-600 focus:ring-4 focus:ring-purple-100 outline-none transition font-medium text-gray-800">
-                </div>
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-[#1e293b] mb-1.5 uppercase tracking-wider">Cohorte *</label>
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-base z-10">🎯</span>
-                    <select id="cohorte" name="cohorte_field" required 
-                            class="w-full pl-10 pr-3.5 py-3 text-sm bg-slate-50 border border-gray-200 rounded-2xl focus:bg-white focus:border-purple-600 focus:ring-4 focus:ring-purple-100 outline-none transition font-medium text-gray-800 cursor-pointer appearance-none">
-                        <option value="" disabled selected>— Sélectionnez votre cohorte —</option>
-                        <option value="C7.A">C7.A</option>
-                        <option value="C7.B">C7.B</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-3">
-                <div>
-                    <label class="block text-xs font-bold text-[#1e293b] mb-1.5 uppercase tracking-wider">Date *</label>
-                    <input type="date" id="date" required 
-                           class="w-full p-3 text-xs sm:text-sm bg-slate-50 border border-gray-200 rounded-2xl focus:bg-white focus:border-purple-600 focus:ring-4 focus:ring-purple-100 outline-none transition font-semibold text-gray-700 cursor-pointer">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-[#1e293b] mb-1.5 uppercase tracking-wider">Heure *</label>
-                    <input type="time" id="heure" required 
-                           class="w-full p-3 text-xs sm:text-sm bg-slate-50 border border-gray-200 rounded-2xl focus:bg-white focus:border-purple-600 focus:ring-4 focus:ring-purple-100 outline-none transition font-semibold text-gray-700 cursor-pointer">
-                </div>
-            </div>
-
-            <button type="submit" 
-                    class="w-full bg-gradient-to-r from-purple-800 via-purple-700 to-purple-600 hover:from-purple-900 hover:to-purple-800 text-white font-extrabold text-base py-4 rounded-2xl transition shadow-lg shadow-purple-200 flex items-center justify-center gap-2 mt-6 active:scale-[0.99]">
-                <span>📱</span> Générer QR Code
-            </button>
-        </form>
-
-        <!-- 2️⃣ QR CODE DISPLAY CONTAINER -->
-        <div id="qrContainer" class="hidden w-full flex-col items-center animate-in fade-in zoom-in duration-300">
-            
-            <div class="w-full bg-gradient-to-b from-purple-50 via-white to-purple-50 border-2 border-purple-600 rounded-[30px] p-6 shadow-xl flex flex-col items-center relative">
-                
-                <div class="bg-purple-700 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-md mb-4 flex items-center gap-1.5">
-                    <span>⚡</span> QR Code de Présence
-                </div>
-
-                <p class="text-xs text-gray-500 font-medium mb-4 text-center">
-                    Scannez ce QR Code pour valider votre présence
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100">
+                <h2 class="text-2xl font-extrabold text-[#1e293b] mb-2 flex items-center gap-2">
+                    <span>📝</span> Détails de la séance
+                </h2>
+                <p class="text-xs text-gray-500 mb-6 leading-relaxed font-normal">
+                    Remplissez les informations ci-dessous pour générer le QR Code de présence.
                 </p>
 
-                <div class="p-4 bg-white rounded-3xl border-2 border-purple-200 shadow-inner mb-5 flex justify-center items-center">
-                    <div id="qrcode"></div>
-                </div>
-
-                <div class="w-full bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-purple-100 shadow-sm text-center space-y-1 mb-2">
-                    <p id="summaryCours" class="text-lg font-extrabold text-purple-950">...</p>
-                    <p id="summaryEnseignant" class="text-xs font-semibold text-gray-600">...</p>
-                    <div class="flex items-center justify-center gap-2 text-xs font-bold text-purple-700 pt-1">
-                        <span id="summaryCohorte" class="bg-purple-100 px-2 py-0.5 rounded-md">...</span>
-                        <span>•</span>
-                        <span id="summaryDateTime">...</span>
+                <form id="sessionForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold text-[#1e293b] mb-1.5">📚 Spécialité *</label>
+                        <select id="cours" required 
+                                class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition font-medium text-[#1e293b]">
+                            <option value="" disabled selected>Sélectionnez une spécialité</option>
+                            <option value="Agroalimentaire et Nutrition durable">🌾 Agroalimentaire et Nutrition durable</option>
+                            <option value="Couture, Mode et Industrie Textile">🧵 Couture, Mode et Industrie Textile</option>
+                            <option value="Communication digitale et Création Multimédia">💻 Communication digitale et Création Multimédia</option>
+                            <option value="Esthétique et bien-être">💅 Esthétique et bien-être</option>
+                        </select>
                     </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-[#1e293b] mb-1.5">👩‍🏫 Formatrice *</label>
+                        <input type="text" id="enseignant" placeholder="Nom de la formatrice" required 
+                               class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-[#1e293b] mb-1.5">🎯 Cohorte *</label>
+                        <select id="cohorte" required 
+                                class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition font-medium text-[#1e293b]">
+                            <option value="" disabled selected>Sélectionnez la cohorte</option>
+                            <option value="C7.A">C7.A</option>
+                            <option value="C7.B">C7.B</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-sm font-bold text-[#1e293b] mb-1.5">📅 Date *</label>
+                            <input type="date" id="date" required 
+                                   class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition font-medium">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-[#1e293b] mb-1.5">⏰ Heure *</label>
+                            <input type="time" id="heure" required 
+                                   class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition font-medium">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="generateBtn"
+                            class="w-full bg-gradient-to-r from-purple-800 to-purple-600 hover:from-purple-900 hover:to-purple-700 text-white font-extrabold text-base py-4 rounded-2xl transition shadow-md shadow-purple-200 flex items-center justify-center gap-2 mt-4">
+                        <span>📲</span> Générer le QR Code
+                    </button>
+                </form>
+            </div>
+
+            <div id="qrResultContainer" class="hidden w-full bg-white rounded-3xl p-5 shadow-sm border border-gray-100 text-center flex flex-col items-center">
+                <h2 class="text-2xl font-bold text-purple-900 mb-1">Séance Prête !</h2>
+                <p class="text-xs text-gray-500 mb-4 font-normal">Faites scanner ce QR Code aux participantes :</p>
+
+                <div class="p-4 bg-purple-50 rounded-3xl border border-purple-100 mb-4 shadow-sm">
+                    <img id="qrCodeImg" src="" alt="QR Code" class="w-52 h-52 rounded-xl mx-auto">
                 </div>
 
+                <div class="w-full space-y-2.5">
+                    <input type="text" id="generatedUrl" readonly class="w-full p-3 text-xs bg-gray-50 border border-gray-200 rounded-2xl text-center text-gray-600 font-mono select-all">
+                    
+                    <button type="button" onclick="copyUrl()" class="w-full bg-purple-100 hover:bg-purple-200 text-purple-900 font-bold py-3 rounded-2xl transition text-sm flex items-center justify-center gap-2">
+                        <span>📋</span> Copier le lien
+                    </button>
+
+                    <button type="button" onclick="resetForm()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-2xl transition text-sm mt-1">
+                        ➕ Créer une autre séance
+                    </button>
+                </div>
             </div>
 
-            <div class="flex items-center gap-3 w-full mt-5">
-                <button type="button" onclick="resetForm()" 
-                        class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3.5 rounded-2xl transition text-sm flex items-center justify-center gap-1.5">
-                    <span>🔄</span> Nouvelle séance
-                </button>
-                <button type="button" onclick="window.print()" 
-                        class="flex-1 bg-purple-100 hover:bg-purple-200 text-purple-800 font-bold py-3.5 rounded-2xl transition text-sm flex items-center justify-center gap-1.5">
-                    <span>🖨️</span> Imprimer
-                </button>
+            <div class="text-center pt-2 pb-2">
+                <p class="text-xs text-gray-400 font-medium">
+                    ©️ 2026 — Solution de gestion des présences
+                </p>
             </div>
 
-        </div>
-
-        <!-- Footer -->
-        <div class="text-center pt-6">
-            <p class="text-xs text-gray-400 font-medium">
-                © 2026 — SAFIA Dar Naim
-            </p>
         </div>
 
     </div>
@@ -169,56 +143,43 @@
     <script>
         const today = new Date();
         document.getElementById('date').value = today.toISOString().split('T')[0];
-        
-        const hours = String(today.getHours()).padStart(2, '0');
-        const minutes = String(today.getMinutes()).padStart(2, '0');
-        document.getElementById('heure').value = `${hours}:${minutes}`;
+        document.getElementById('heure').value = today.toTimeString().slice(0, 5);
 
-        document.getElementById('teacherForm').addEventListener('submit', function(e) {
+        document.getElementById('sessionForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const cours = document.getElementById('cours').value.trim();
-            const enseignant = document.getElementById('enseignant').value.trim();
-            const cohorte = document.getElementById('cohorte').value;
-            const date = document.getElementById('date').value;
-            const heure = document.getElementById('heure').value;
+            const cours = encodeURIComponent(document.getElementById('cours').value);
+            const enseignant = encodeURIComponent(document.getElementById('enseignant').value.trim());
+            const cohorte = encodeURIComponent(document.getElementById('cohorte').value);
+            const date = encodeURIComponent(document.getElementById('date').value);
+            const heure = encodeURIComponent(document.getElementById('heure').value);
+            const id = 's_' + Date.now();
 
-            const sessionId = 's_' + Date.now();
+            const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + '/index.html';
+            const targetUrl = `${baseUrl}?id=${id}&cours=${cours}&enseignant=${enseignant}&cohorte=${cohorte}&date=${date}&heure=${heure}`;
 
-            const baseUrl = window.location.origin + window.location.pathname.replace('Teacher.html', 'index.html');
-            const targetUrl = `${baseUrl}?id=${encodeURIComponent(sessionId)}&cours=${encodeURIComponent(cours)}&enseignant=${encodeURIComponent(enseignant)}&cohorte=${encodeURIComponent(cohorte)}&date=${encodeURIComponent(date)}&heure=${encodeURIComponent(heure)}`;
+            const qrApi = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(targetUrl)}`;
 
-            document.getElementById('qrcode').innerHTML = "";
+            document.getElementById('qrCodeImg').src = qrApi;
+            document.getElementById('generatedUrl').value = targetUrl;
 
-            new QRCode(document.getElementById("qrcode"), {
-                text: targetUrl,
-                width: 190,
-                height: 190,
-                colorDark : "#4c1d95",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            });
-
-            document.getElementById('summaryCours').innerText = cours;
-            document.getElementById('summaryEnseignant').innerText = "Formatrice: " + enseignant;
-            document.getElementById('summaryCohorte').innerText = cohorte;
-            document.getElementById('summaryDateTime').innerText = `${date} à ${heure}`;
-
-            document.getElementById('teacherForm').classList.add('hidden');
-            document.getElementById('pageSubTitle').innerText = "Séance créée avec succès";
-            document.getElementById('qrContainer').classList.remove('hidden');
-            document.getElementById('qrContainer').classList.add('flex');
+            document.getElementById('qrResultContainer').classList.remove('hidden');
+            document.getElementById('qrResultContainer').scrollIntoView({ behavior: 'smooth' });
         });
 
+        function copyUrl() {
+            const urlInput = document.getElementById('generatedUrl');
+            urlInput.select();
+            navigator.clipboard.writeText(urlInput.value);
+            alert('Lien copié !');
+        }
+
         function resetForm() {
-            document.getElementById('teacherForm').classList.remove('hidden');
-            document.getElementById('qrContainer').classList.add('hidden');
-            document.getElementById('qrContainer').classList.remove('flex');
-            document.getElementById('pageSubTitle').innerText = "Remplissez les détails de la séance";
-            
-            document.getElementById('cours').value = '';
-            document.getElementById('enseignant').value = '';
-            document.getElementById('cohorte').value = '';
+            document.getElementById('qrResultContainer').classList.add('hidden');
+            document.getElementById('sessionForm').reset();
+            const today = new Date();
+            document.getElementById('date').value = today.toISOString().split('T')[0];
+            document.getElementById('heure').value = today.toTimeString().slice(0, 5);
         }
     </script>
 </body>
