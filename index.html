@@ -73,7 +73,6 @@
                         <p id="enseignantDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
 
-                    <!-- تم إضافة حقل Cohorte هنا -->
                     <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-purple-100">
                         <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">🎯 Cohorte</span>
                         <p id="cohorteDisplay" class="text-base font-bold text-[#1e293b]">...</p>
@@ -188,20 +187,20 @@
     </div>
 
     <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxgs-6zJzQinE-G3m0HiNmH4BstkYMWdR8d23ksxN77DGQFcTUBuTJkHJO2dEMHd-rMwQ/exec";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxR76DIbT9u58MyT6xPG7442KgglJ6GLw654WK4soz65CV0vlsLboF3hnBRtlLd95Ir1g/exec";
 
         const urlParams = new URLSearchParams(window.location.search);
         
         const id = urlParams.get('id') || 'default';
         const cours = urlParams.get('cours') || '-';
         const enseignant = urlParams.get('enseignant') || '-';
-        const cohorte = urlParams.get('cohorte') || '-'; // تم إضافة قراءة المعلمة cohorte
+        const cohorte = urlParams.get('cohorte') || '-';
         const date = urlParams.get('date') || '-';
         const heure = urlParams.get('heure') || '-';
 
         document.getElementById('coursDisplay').innerText = cours;
         document.getElementById('enseignantDisplay').innerText = enseignant;
-        document.getElementById('cohorteDisplay').innerText = cohorte; // عرض المجموعة
+        document.getElementById('cohorteDisplay').innerText = cohorte;
         document.getElementById('dateDisplay').innerText = date;
         document.getElementById('heureDisplay').innerText = heure;
 
@@ -227,7 +226,7 @@
                 id: id,
                 cours: cours,
                 enseignant: enseignant,
-                cohorte: cohorte, // تم ربط قيمة cohorte من الرابط
+                cohorte: cohorte,
                 date: date,
                 heure: heure,
                 nom: nom,
