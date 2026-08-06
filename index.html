@@ -73,6 +73,12 @@
                         <p id="enseignantDisplay" class="text-base font-bold text-[#1e293b]">...</p>
                     </div>
 
+                    <!-- تم إضافة حقل Cohorte هنا -->
+                    <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-purple-100">
+                        <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">🎯 Cohorte</span>
+                        <p id="cohorteDisplay" class="text-base font-bold text-[#1e293b]">...</p>
+                    </div>
+
                     <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-purple-100">
                         <span class="text-xs text-gray-400 font-medium flex items-center gap-1 mb-0.5">📅 Date</span>
                         <p id="dateDisplay" class="text-base font-bold text-[#1e293b]">...</p>
@@ -121,7 +127,7 @@
 
             <div class="text-center pt-2 pb-2">
                 <p class="text-xs text-gray-400 font-medium">
-                    © 2026 — Solution de gestion des présences
+                    ©️ 2026 — Solution de gestion des présences
                 </p>
             </div>
 
@@ -189,11 +195,13 @@
         const id = urlParams.get('id') || 'default';
         const cours = urlParams.get('cours') || '-';
         const enseignant = urlParams.get('enseignant') || '-';
+        const cohorte = urlParams.get('cohorte') || '-'; // تم إضافة قراءة المعلمة cohorte
         const date = urlParams.get('date') || '-';
         const heure = urlParams.get('heure') || '-';
 
         document.getElementById('coursDisplay').innerText = cours;
         document.getElementById('enseignantDisplay').innerText = enseignant;
+        document.getElementById('cohorteDisplay').innerText = cohorte; // عرض المجموعة
         document.getElementById('dateDisplay').innerText = date;
         document.getElementById('heureDisplay').innerText = heure;
 
@@ -219,7 +227,7 @@
                 id: id,
                 cours: cours,
                 enseignant: enseignant,
-                cohorte: "",
+                cohorte: cohorte, // تم ربط قيمة cohorte من الرابط
                 date: date,
                 heure: heure,
                 nom: nom,
