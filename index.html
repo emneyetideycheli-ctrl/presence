@@ -9,7 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #e2e8f0; /* خلفية الرمادي الناعم الخارجي */
+            background-color: #e2e8f0;
         }
     </style>
 </head>
@@ -112,8 +112,8 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Numéro étudiant *</label>
-                        <input type="text" id="numero" placeholder="Ex : E12345678" required 
+                        <label class="block text-sm font-bold text-[#1e293b] mb-1.5">Numéro badge *</label>
+                        <input type="text" id="numero_badge" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="Ex : 12345678" required 
                                class="w-full p-3.5 text-sm bg-white border border-gray-200 rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition placeholder:text-gray-300 font-medium">
                     </div>
 
@@ -219,35 +219,31 @@
 
             const nom = document.getElementById('nom').value.trim();
             const prenom = document.getElementById('prenom').value.trim();
-            const numero = document.getElementById('numero').value.trim();
+            const numeroBadge = document.getElementById('numero_badge').value.trim();
             const fullName = prenom + " " + nom;
 
-            const payload = {
-                id: id,
-                cours: cours,
-                enseignant: enseignant,
-                cohorte: cohorte,
-                date: date,
-                heure: heure,
-                nom: nom,
-                prenom: prenom,
-                numero: numero,
-                genre: ""
-            };
+            const params = new URLSearchParams();
+            params.append('id', id);
+            params.append('cours', cours);
+            params.append('enseignant', enseignant);
+            params.append('cohorte', cohorte);
+            params.append('date', date);
+            params.append('heure', heure);
+            params.append('nom', nom);
+            params.append('prenom', prenom);
+            params.append('numero_badge', numeroBadge);
 
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            }).then(() => {
-                sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params.toString()
+            }).catch(err => console.error("Erreur:", err));
+
+            sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
+            setTimeout(function() {
                 showSuccessScreen(fullName);
-            }).catch(err => {
-                console.error("Erreur:", err);
-                sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
-                showSuccessScreen(fullName);
-            });
+            }, 200);
         });
 
         function showSuccessScreen(studentName) {
