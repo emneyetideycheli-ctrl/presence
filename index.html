@@ -9,7 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #e2e8f0;
+            background-color: #e2e8f0; /* خلفية الرمادي الناعم الخارجي */
         }
     </style>
 </head>
@@ -222,30 +222,32 @@
             const numero = document.getElementById('numero').value.trim();
             const fullName = prenom + " " + nom;
 
-            // إعداد البيانات بصيغة URLSearchParams للحفاظ على تنسيق الجدول في الشيت
-            const params = new URLSearchParams();
-            params.append('id', id);
-            params.append('cours', cours);
-            params.append('enseignant', enseignant);
-            params.append('cohorte', cohorte);
-            params.append('date', date);
-            params.append('heure', heure);
-            params.append('nom', nom);
-            params.append('prenom', prenom);
-            params.append('numero', numero);
+            const payload = {
+                id: id,
+                cours: cours,
+                enseignant: enseignant,
+                cohorte: cohorte,
+                date: date,
+                heure: heure,
+                nom: nom,
+                prenom: prenom,
+                numero: numero,
+                genre: ""
+            };
 
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: params.toString()
-            }).catch(err => console.error("Erreur:", err));
-
-            // الانتقال الفوري لشاشة النجاح
-            sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
-            setTimeout(function() {
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
                 showSuccessScreen(fullName);
-            }, 200);
+            }).catch(err => {
+                console.error("Erreur:", err);
+                sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
+                showSuccessScreen(fullName);
+            });
         });
 
         function showSuccessScreen(studentName) {
