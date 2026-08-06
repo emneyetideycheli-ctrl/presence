@@ -170,7 +170,7 @@
             <h3 class="text-xl font-bold text-gray-800 mb-2">Attention !</h3>
             
             <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium">
-                Il est strictement interdit d'enregistrer la présence d'une personne absente.
+                Il est strictly interdit d'enregistrer la présence d'une personne absente.
             </p>
 
             <div class="flex flex-col gap-2.5">
@@ -222,27 +222,26 @@
             const numero = document.getElementById('numero').value.trim();
             const fullName = prenom + " " + nom;
 
-            const payload = {
-                id: id,
-                cours: cours,
-                enseignant: enseignant,
-                cohorte: cohorte,
-                date: date,
-                heure: heure,
-                nom: nom,
-                prenom: prenom,
-                numero: numero
-            };
+            // إعداد البيانات بصيغة URLSearchParams للحفاظ على تنسيق الجدول في الشيت
+            const params = new URLSearchParams();
+            params.append('id', id);
+            params.append('cours', cours);
+            params.append('enseignant', enseignant);
+            params.append('cohorte', cohorte);
+            params.append('date', date);
+            params.append('heure', heure);
+            params.append('nom', nom);
+            params.append('prenom', prenom);
+            params.append('numero', numero);
 
-            // إرسال البيانات فوراً في الخلفية (سريع جداً)
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: { 'Content-Type': 'text/plain' },
-                body: JSON.stringify(payload)
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params.toString()
             }).catch(err => console.error("Erreur:", err));
 
-            // إظهار شاشة النجاح فوراً للطالبة خلال 0.2 ثانية
+            // الانتقال الفوري لشاشة النجاح
             sessionStorage.setItem(sessionKey, JSON.stringify({ fullName: fullName }));
             setTimeout(function() {
                 showSuccessScreen(fullName);
