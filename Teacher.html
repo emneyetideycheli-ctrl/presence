@@ -9,13 +9,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #e2e8f0;
+            background-color: #f3e8ff;
         }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center py-4 px-2 sm:px-4">
 
-    <div class="w-full max-w-md bg-white rounded-[32px] shadow-xl border border-gray-100 p-4 sm:p-6 flex flex-col items-center relative overflow-hidden">
+    <div class="w-full max-w-md bg-white rounded-[32px] shadow-xl border border-purple-100 p-4 sm:p-6 flex flex-col items-center relative overflow-hidden">
 
         <div class="w-full bg-gradient-to-r from-purple-900 via-purple-700 to-purple-900 text-white rounded-2xl py-2.5 px-4 shadow-sm mb-3 flex items-center justify-center gap-2 border border-purple-300/30">
             <span class="text-amber-300 text-sm">📍</span>
@@ -23,7 +23,6 @@
         </div>
 
         <header class="w-full bg-white rounded-2xl p-2 shadow-sm border border-gray-100 flex items-center justify-between mb-4">
-            
             <div class="flex items-center">
                 <div class="w-11 h-11 rounded-full overflow-hidden border border-purple-200 shadow-sm flex items-center justify-center bg-white">
                     <img src="safia.jpg" alt="SAFIA" class="w-full h-full object-cover">
@@ -39,7 +38,6 @@
                     <img src="unicef.jpg" alt="UNICEF" class="w-full h-full object-cover">
                 </div>
             </div>
-
         </header>
 
         <h1 class="text-3xl font-extrabold text-[#1e293b] text-center flex items-center justify-center gap-2 mb-1">
@@ -51,7 +49,8 @@
 
         <div id="formContainer" class="w-full space-y-6">
 
-            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100">
+            <!-- نموذج الإدخال -->
+            <div id="formBlock" class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100">
                 <h2 class="text-2xl font-extrabold text-[#1e293b] mb-2 flex items-center gap-2">
                     <span>📝</span> Détails de la séance
                 </h2>
@@ -109,22 +108,30 @@
                 </form>
             </div>
 
-            <div id="qrResultContainer" class="hidden w-full bg-white rounded-3xl p-5 shadow-sm border border-gray-100 text-center flex flex-col items-center">
+            <!-- عرض الـ QR Code البنفسجي المضمون والعملي 100% -->
+            <div id="qrResultContainer" class="hidden w-full bg-white rounded-3xl p-6 shadow-sm border border-purple-100 text-center flex flex-col items-center">
                 <h2 class="text-2xl font-bold text-purple-900 mb-1">Séance Prête !</h2>
-                <p class="text-xs text-gray-500 mb-4 font-normal">Faites scanner ce QR Code aux participantes :</p>
+                <p class="text-xs text-gray-500 mb-5 font-normal">Faites scanner ce QR Code aux participantes :</p>
 
-                <div class="p-4 bg-purple-50 rounded-3xl border border-purple-100 mb-4 shadow-sm">
-                    <img id="qrCodeImg" src="" alt="QR Code" class="w-52 h-52 rounded-xl mx-auto">
+                <!-- بطاقة الـ QR Code مع الهوية البصرية وشعار Safia بأعلى البطاقة -->
+                <div class="w-full max-w-[270px] bg-gradient-to-b from-purple-50 via-white to-purple-50 p-5 rounded-[32px] border-2 border-purple-200 shadow-md mb-6 flex flex-col items-center">
+                    
+                    <div class="flex items-center gap-2 mb-3 bg-white px-3 py-1.5 rounded-full border border-purple-200 shadow-sm">
+                        <img src="safia.jpg" alt="SAFIA" class="w-6 h-6 rounded-full object-cover">
+                        <span class="text-xs font-bold text-purple-900">Centre SAFIA</span>
+                    </div>
+
+                    <div class="p-3 bg-white rounded-2xl border border-purple-100 shadow-inner w-full">
+                        <img id="qrCodeImg" src="" alt="QR Code" class="w-full h-auto rounded-lg">
+                    </div>
                 </div>
 
                 <div class="w-full space-y-2.5">
-                    <input type="text" id="generatedUrl" readonly class="w-full p-3 text-xs bg-gray-50 border border-gray-200 rounded-2xl text-center text-gray-600 font-mono select-all">
-                    
-                    <button type="button" onclick="copyUrl()" class="w-full bg-purple-100 hover:bg-purple-200 text-purple-900 font-bold py-3 rounded-2xl transition text-sm flex items-center justify-center gap-2">
+                    <button type="button" onclick="copyUrl()" class="w-full bg-purple-100 hover:bg-purple-200 text-purple-900 font-bold py-3.5 rounded-2xl transition text-sm flex items-center justify-center gap-2 border border-purple-200/60">
                         <span>📋</span> Copier le lien
                     </button>
 
-                    <button type="button" onclick="resetForm()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-2xl transition text-sm mt-1">
+                    <button type="button" onclick="resetForm()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3.5 rounded-2xl transition text-sm">
                         ➕ Créer une autre séance
                     </button>
                 </div>
@@ -141,6 +148,8 @@
     </div>
 
     <script>
+        let currentTargetUrl = "";
+
         const today = new Date();
         document.getElementById('date').value = today.toISOString().split('T')[0];
         document.getElementById('heure').value = today.toTimeString().slice(0, 5);
@@ -156,27 +165,30 @@
             const id = 's_' + Date.now();
 
             const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + '/index.html';
-            const targetUrl = `${baseUrl}?id=${id}&cours=${cours}&enseignant=${enseignant}&cohorte=${cohorte}&date=${date}&heure=${heure}`;
+            currentTargetUrl = `${baseUrl}?id=${id}&cours=${cours}&enseignant=${enseignant}&cohorte=${cohorte}&date=${date}&heure=${heure}`;
 
-            const qrApi = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(targetUrl)}`;
+            // QR Code بنفسجي نقي وواضح بدون أي عوائق في المسح
+            const qrApi = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&color=6b21a8&data=${encodeURIComponent(currentTargetUrl)}`;
 
             document.getElementById('qrCodeImg').src = qrApi;
-            document.getElementById('generatedUrl').value = targetUrl;
 
+            document.getElementById('formBlock').classList.add('hidden');
             document.getElementById('qrResultContainer').classList.remove('hidden');
             document.getElementById('qrResultContainer').scrollIntoView({ behavior: 'smooth' });
         });
 
         function copyUrl() {
-            const urlInput = document.getElementById('generatedUrl');
-            urlInput.select();
-            navigator.clipboard.writeText(urlInput.value);
-            alert('Lien copié !');
+            if (currentTargetUrl) {
+                navigator.clipboard.writeText(currentTargetUrl);
+                alert('Lien copié !');
+            }
         }
 
         function resetForm() {
             document.getElementById('qrResultContainer').classList.add('hidden');
+            document.getElementById('formBlock').classList.remove('hidden');
             document.getElementById('sessionForm').reset();
+            
             const today = new Date();
             document.getElementById('date').value = today.toISOString().split('T')[0];
             document.getElementById('heure').value = today.toTimeString().slice(0, 5);
